@@ -12,7 +12,8 @@ instruction files, so **any AI coding assistant can use it** — Claude Code, Co
 Cursor, or anything else that can read files and follow instructions.
 
 - **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`
-  and `/ai-bid-gen:write-bid` commands (plus the `write-bid` skill) automatically.
+  and `/ai-bid-gen:write-bid` commands (plus the `write-bid`, `find-evidence`, and
+  `humanize` skills) automatically.
 - **Any other model/tool:** point the model at the instruction files directly
   (below). The behavior is identical because the files are the source of truth.
 
@@ -109,8 +110,17 @@ ai-bid-gen/
 │   ├── init.md              # scaffolds the bid-resources/ knowledge base
 │   └── write-bid.md         # runs the write-bid skill
 ├── skills/
-│   └── write-bid/
-│       └── SKILL.md         # writes a bid from the knowledge base
+│   ├── write-bid/
+│   │   └── SKILL.md         # orchestrator: runs the full bid flow
+│   ├── find-evidence/
+│   │   └── SKILL.md         # find & rank relevant projects/profile for a job
+│   └── humanize/
+│       └── SKILL.md         # make any output read human, not AI-generated
 ├── LICENSE
 └── README.md
 ```
+
+The `write-bid` skill is an **orchestrator** — it composes two reusable skills:
+`find-evidence` (the "find & fetch" retrieval step) and `humanize` (the anti-AI-tell
+voice rules). Both are useful on their own and are the foundation for future outputs
+(cover letters, resumes) that draw from the same knowledge base.

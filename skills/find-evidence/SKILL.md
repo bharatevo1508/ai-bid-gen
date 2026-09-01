@@ -1,15 +1,17 @@
 ---
 name: find-evidence
-description: Find and rank the most relevant supporting evidence — projects, plus profile fit — from the bid-resources knowledge base for a given job description or target role, returning a ranked shortlist to pick from and flagging gaps. Use as the retrieval step when writing a bid, cover letter, or resume, or when the user asks "which of my projects/experience fit this job?".
+description: Find and rank the most relevant supporting evidence — projects, plus profile fit — from the bid-resources knowledge base for ANY input: a job description, a role, a topic, a brief, a question, or any piece of text. Returns a ranked shortlist to pick from and flags gaps. Use as the retrieval step when writing a bid, cover letter, or resume, or whenever the user asks "which of my projects/experience relate to X?".
 ---
 
 # Find Evidence
 
-Given a **target** (a pasted job description, or a role / company) and the user's
-knowledge base at `bid-resources/`, find and rank the most relevant supporting
-evidence and return a shortlist to choose from. This is the shared "find & fetch"
-step — a bid, cover letter, or resume generator all call into it. It does NOT write
-anything; it retrieves and ranks.
+Given **any input** — a pasted job description, a role, a topic, a client brief, a
+question, or free text — and the user's knowledge base at `bid-resources/`, find and
+rank the most relevant supporting evidence and return a shortlist to choose from.
+
+This is the shared "find & fetch" step. It is **not** bid-specific: a bid, cover
+letter, resume, or a plain "which of my work relates to this?" query all call into it.
+It does NOT write anything; it retrieves and ranks.
 
 ## Only real content counts
 
@@ -18,37 +20,40 @@ NOT user content. When listing, counting, or reading from `projects/` or `profil
 **ignore `README.md` and `_template.md`** (and any file whose body is still the
 unedited template placeholders). A folder that contains only those files is **empty**.
 
-## Step 1 — Understand the target
+## Step 1 — Understand the input
 
-From the target, extract:
-- The core **problem** to be solved (for a role, the problems that role owns)
-- Required **skills** and **tech stack**
-- Any **seniority / domain** signals
+Distill the input into what you'll match on. Depending on what the input is, this may
+include:
+- the core **problem(s)** or need it describes,
+- the **skills**, **tech**, or **topics** involved,
+- any **domain / seniority / audience** signals.
 
-If the caller already passed these extracted, use them instead of re-deriving.
+Use whatever is present — a one-line topic is enough; a full job post gives more. If
+the caller already passed these extracted, use them instead of re-deriving.
 
 ## Step 2 — Rank the projects
 
 Scan `bid-resources/projects/`. Each project is both a case study and a credibility
-signal, so match on **either axis**:
-- by **problem type** — the project's *Problem / Outcome* matches the target's problem, and/or
-- by **tech stack** — the project's *Tech stack* overlaps the target's requirements.
+signal, so match on **any relevant axis**:
+- by **problem / topic** — the project's *Problem / Outcome* relates to the input, and/or
+- by **tech / skills** — the project's *Tech stack* overlaps the input.
 
-Prefer projects that hit **both** axes, and prefer ones with a **measured outcome** and
-a **live production URL**. Return them ranked, each with a one-line reason it matched.
+Prefer projects that match on **multiple** axes, and prefer ones with a **measured
+outcome** and a **live production URL**. Return them ranked, each with a one-line reason
+it matched.
 
 ## Step 3 — Surface profile fit
 
 List the available profiles from `bid-resources/profiles/` (ignoring scaffolding), each
-with a short note on how well it fits the target (skills overlap, positioning). Do
+with a short note on how well it fits the input (skills overlap, positioning). Do
 **NOT** auto-select a profile — the caller or user chooses. This step only informs that
-choice.
+choice. Skip it if profile fit is irrelevant to the caller's purpose.
 
 ## Step 4 — Report gaps
 
 Flag weaknesses plainly:
-- No project backs the target's **problem**.
-- No project uses the required **tech**.
+- No project relates to the input's **problem / topic**.
+- No project uses the relevant **tech / skills**.
 - No profile is a strong fit.
 
 Name exactly what's missing so the caller can decide to add material or proceed.
@@ -56,4 +61,4 @@ Name exactly what's missing so the caller can decide to add material or proceed.
 ## Output
 
 Return, in order: the **ranked projects** (with why each matched), the **profile fit
-notes**, and any **gaps**. The caller decides what to include.
+notes** (when relevant), and any **gaps**. The caller decides what to use.

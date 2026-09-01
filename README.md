@@ -113,7 +113,7 @@ ai-bid-gen/
 │   ├── write-bid/
 │   │   └── SKILL.md         # orchestrator: runs the full bid flow
 │   ├── find-evidence/
-│   │   └── SKILL.md         # find & rank relevant projects/profile for a job
+│   │   └── SKILL.md         # find & rank relevant projects/profile for any input
 │   └── humanize/
 │       └── SKILL.md         # make any output read human, not AI-generated
 ├── LICENSE

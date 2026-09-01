@@ -1,6 +1,6 @@
 ---
 name: write-bid
-description: Write a bid/proposal from a pasted job description using the bid-resources knowledge base (case studies, projects, sample bids, profiles). Use when the user wants to draft an Upwork/freelance bid or proposal. The generated bid STRICTLY follows the exact format of a chosen sample bid.
+description: Write a bid/proposal from a pasted job description using the bid-resources knowledge base (projects, sample bids, profiles). Use when the user wants to draft an Upwork/freelance bid or proposal. The generated bid STRICTLY follows the exact format of a chosen sample bid.
 ---
 
 # Write Bid
@@ -19,8 +19,8 @@ diversion.
 
 ## Step 1 — Verify the knowledge base
 
-Check that `bid-resources/` exists with `case-studies/`, `projects/`,
-`sample-bids/`, and `profiles/`.
+Check that `bid-resources/` exists with `projects/`, `sample-bids/`, and
+`profiles/`.
 
 If it's missing, tell the user to set it up first (run `/ai-bid-gen:init` in Claude
 Code, or follow the instructions in `commands/init.md` with any other model), then stop.
@@ -57,20 +57,24 @@ From the pasted job description, extract:
 
 ## Step 6 — Match supporting evidence
 
-- **Case studies** — scan `bid-resources/case-studies/` and select those whose
-  *problem type* matches the job's problem.
-- **Projects** — scan `bid-resources/projects/` and select those whose *tech stack*
-  overlaps with the job's requirements (prefer ones with live production URLs).
+Scan `bid-resources/projects/` and select the projects that support this job.
+Each project is both a case study and a credibility signal, so match on **either
+axis**:
+- by **problem type** — the project's *Problem / Outcome* matches the job's problem, and/or
+- by **tech stack** — the project's *Tech stack* overlaps the job's requirements.
+
+Prefer projects that hit both axes, and prefer ones with a measured outcome and a
+live production URL.
 
 ## Step 7 — Gap check + clarifying questions (prompt the user)
 
 Before drafting, prompt the user if anything is weak or ambiguous:
 
-- **Missing evidence:** if no case study matches the problem, or no project matches
-  the tech stack, or the chosen profile lacks key info, TELL the user plainly, e.g.:
-  > "Heads up — I couldn't find a case study backing <problem>, and no project uses
-  > <tech>. The bid will be weaker without proof. Do you want to add one, or proceed
-  > anyway?"
+- **Missing evidence:** if no project backs the job's problem, or no project uses
+  the required tech stack, or the chosen profile lacks key info, TELL the user
+  plainly, e.g.:
+  > "Heads up — I couldn't find a project backing <problem>, and none use <tech>.
+  > The bid will be weaker without proof. Do you want to add one, or proceed anyway?"
   Name exactly what's missing. Let the user add material or proceed.
 - **Ambiguity:** if any part of the job is unclear (scope, which deliverable, which
   project to highlight), ask clarifying questions rather than guessing.
@@ -82,8 +86,8 @@ Write the bid:
   ordering, and style. (See the non-negotiable rule above.)
 - **Length:** match the sample bid's length.
 - **Voice:** use the chosen profile's voice and positioning.
-- **Evidence:** weave in the matched case studies and projects as proof, including
-  production URLs where relevant.
+- **Evidence:** weave in the matched projects as proof — their problem/outcome
+  story and production URLs where relevant.
 - **Pricing / rate:** include pricing ONLY if the job description explicitly asked
   about rate, budget, or hours. If it asked, address it using the profile's hourly
   rate (and estimate hours/total only if the job is fixed-price and pricing detail

@@ -1,9 +1,9 @@
 # ai-bid-gen
 
-Write winning bids and proposals from information you already have — case studies,
-projects, accepted sample bids, and profiles. You paste a job description, pick a
-profile, and it drafts a proposal that **strictly follows the format of your
-accepted sample bids**, backed by the most relevant case studies and projects.
+Write winning bids and proposals from information you already have — projects
+(each doubling as a case study), accepted sample bids, and profiles. You paste a
+job description, pick a profile, and it drafts a proposal that **strictly follows
+the format of your accepted sample bids**, backed by your most relevant projects.
 
 ## Model-agnostic
 
@@ -20,7 +20,7 @@ Cursor, or anything else that can read files and follow instructions.
 
 ```
 1. Set up the knowledge base   →  creates bid-resources/ with 4 folders
-2. Populate it                 →  drop in your case studies, projects, sample bids, profiles
+2. Populate it                 →  drop in your projects, sample bids, profiles
 3. Write a bid                 →  paste a job description → get a tailored proposal
 ```
 
@@ -28,8 +28,9 @@ Cursor, or anything else that can read files and follow instructions.
 
 ```
 bid-resources/
-├── case-studies/   # problems you've solved — matched to a job by PROBLEM TYPE
-├── projects/       # overview, responsibilities, tech stack, production URLs — matched by TECH
+├── projects/       # each project is both a case study AND a credibility signal —
+│                   # problem, solution, tech stack, outcome, production URL.
+│                   # Matched to a job by PROBLEM TYPE and/or TECH.
 ├── sample-bids/    # bids you already submitted AND won — the exact FORMAT to mirror
 └── profiles/       # each profile's URL, intro, description, hourly rate, skills — the VOICE + rate
 ```
@@ -43,10 +44,10 @@ showing the fields to fill in.
 2. Asks you to **paste** the job description (no URL crawling — paste is reliable).
 3. **You choose the profile** to bid as.
 4. Picks the **sample bid to mirror** (asks which one if you have several).
-5. Analyzes the job and matches relevant **case studies** (by problem) and
-   **projects** (by tech stack).
-6. **Warns you** if evidence is missing (e.g. no case study backs the problem, no
-   project uses the tech) and **asks clarifying questions** when anything is unclear.
+5. Analyzes the job and matches relevant **projects** — by problem type and/or by
+   tech stack (each project doubles as a case study).
+6. **Warns you** if evidence is missing (e.g. no project backs the problem or uses
+   the tech) and **asks clarifying questions** when anything is unclear.
 7. Drafts the bid — **strictly following the sample bid's exact format and length**,
    in the chosen profile's voice. Pricing is included **only if the job asked** about
    rate/budget/hours.
@@ -97,6 +98,7 @@ you use.
 ```
 ai-bid-gen/
 ├── .claude-plugin/
+│   ├── marketplace.json     # marketplace manifest (required for remote install)
 │   └── plugin.json          # plugin manifest
 ├── commands/
 │   └── init.md              # scaffolds the bid-resources/ knowledge base

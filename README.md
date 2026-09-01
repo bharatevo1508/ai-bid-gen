@@ -43,18 +43,23 @@ showing the fields to fill in.
 1. Verifies `bid-resources/` exists.
 2. Asks you to **paste** the job description (no URL crawling — paste is reliable).
 3. **You choose the profile** to bid as.
-4. Picks the **sample bid to mirror** (asks which one if you have several).
+4. Asks **how to use your samples** — either **mimic one specific sample** (copy its
+   exact format) or **take inspiration from all of them** and craft a fresh, catchy
+   bid with a strong hook from the pattern they share.
 5. Analyzes the job and matches relevant **projects** — by problem type and/or by
-   tech stack (each project doubles as a case study).
+   tech stack (each project doubles as a case study). It also **flags any hidden
+   "prove you're human" instructions** planted in the job post and asks you how to
+   handle them.
 6. **Warns you** if evidence is missing (e.g. no project backs the problem or uses
    the tech) and **asks clarifying questions** when anything is unclear.
-7. Drafts the bid — **strictly following the sample bid's exact format and length**,
-   in the chosen profile's voice. Pricing is included **only if the job asked** about
+7. Drafts the bid in the chosen profile's voice, written to **read as human, not
+   AI-generated**. Pricing is included **only if the job asked** about
    rate/budget/hours.
 8. Refines on your feedback and saves to `bids/<job-slug>/bid.md`.
 
-> **The one hard rule:** the generated bid mirrors your chosen sample bid's format
-> exactly — same structure, sections, ordering, and style. Only the content changes.
+> **Mimic mode** reproduces your chosen sample's format exactly — same structure,
+> sections, ordering, and style; only the content changes. **Inspiration mode**
+> builds its own best-of structure from the shared DNA of all your winning samples.
 
 ## Install
 

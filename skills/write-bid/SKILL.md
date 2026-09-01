@@ -1,6 +1,6 @@
 ---
 name: write-bid
-description: Write a bid/proposal from a pasted job description using the bid-resources knowledge base (projects, sample bids, profiles). Use when the user wants to draft an Upwork/freelance bid or proposal. The generated bid STRICTLY follows the exact format of a chosen sample bid.
+description: Write a bid/proposal from a pasted job description using the bid-resources knowledge base (projects, sample bids, profiles). Use when the user wants to draft an Upwork/freelance bid or proposal. The user chooses whether to mimic one sample bid's exact format or take inspiration from all samples and craft a fresh, catchy bid.
 ---
 
 # Write Bid
@@ -8,20 +8,31 @@ description: Write a bid/proposal from a pasted job description using the bid-re
 Generate a bid/proposal for a job by grounding it in the user's `bid-resources/`
 knowledge base. Follow these steps in order. Do not skip the checkpoints.
 
-## The one non-negotiable rule
+## Two modes — the user picks how samples are used
 
-**The generated bid MUST strictly follow the exact format of the chosen sample bid.**
+The bid is written in one of two modes, chosen by the user in Step 4:
+
+**Mimic mode — the non-negotiable rule.** When the user picks one specific sample
+to mimic, the generated bid MUST strictly follow the exact format of that sample.
 Same structure, same sections, same ordering, same style, same approximate length.
 Do NOT add sections, remove sections, reorder, or introduce a different format under
-any circumstance. The sample bid is the format authority — mirror it exactly. The
-only thing that changes is the *content*, tailored to this job. No caveats, no
-diversion.
+any circumstance. That sample is the format authority — mirror it exactly. The only
+thing that changes is the *content*, tailored to this job. No caveats, no diversion.
+
+**Inspiration mode.** When the user picks inspiration-from-all, do NOT copy any one
+sample. Instead, study every sample, deduce the winning pattern they share, and
+craft your own best-of structure — a strong hook, the persuasion beats they have in
+common, natural length. See Step 8 for how to synthesize it. This mode is allowed to
+depart from any single sample's exact format because it is building a new one from
+the shared DNA of all of them.
+
+In both modes, the **Sound human, not AI-generated** rules below always apply.
 
 ## Sound human, not AI-generated
 
 The bid must read like a person wrote it, not a language model. Clients actively
-screen out AI-written bids, and the sample bid you're mirroring was written by a
-human and won — so match its natural voice, not a generic "assistant" voice.
+screen out AI-written bids, and your samples were written by a human and won — so
+match that natural voice, not a generic "assistant" voice.
 
 **Avoid these AI tells:**
 - **Em-dash / hyphen overuse.** Do not pepper the text with `—`. A human bid uses
@@ -40,7 +51,7 @@ human and won — so match its natural voice, not a generic "assistant" voice.
 
 **Do instead:** short, direct sentences with natural rhythm and some variation.
 Contractions are fine. Say the concrete thing (the actual tech, the actual result)
-instead of an abstract claim. When in doubt, write it the way the chosen sample bid
+instead of an abstract claim. When in doubt, write it the way your winning samples
 would, in the chosen profile's voice.
 
 ## Step 1 — Verify the knowledge base
@@ -63,14 +74,28 @@ profile they are bidding as. Do NOT pick the "best matching" profile automatical
 — the user selects. Read the chosen profile file for its voice, headline, intro
 style, skills, and hourly rate.
 
-## Step 4 — Choose the sample bid to mirror (format authority)
+## Step 4 — Choose how to use the samples
 
-Read `bid-resources/sample-bids/`.
-- If there is exactly **one** sample bid, that is the format to follow.
-- If there are **multiple**, ask the user which sample bid's format to mirror.
+Read `bid-resources/sample-bids/`. Then ask the user which approach they want:
 
-The chosen sample defines the EXACT format and the target length. Study its
-structure carefully before drafting.
+> "Do you want me to **(a) mimic one specific sample** — copy its exact format — or
+> **(b) take inspiration from all your samples** and craft a fresh, catchy bid from
+> the pattern they share?"
+
+**If they choose (a) mimic:**
+- If there is exactly **one** sample bid, that is the one to mimic.
+- If there are **multiple**, ask the user **which** sample to mimic.
+- The chosen sample defines the EXACT format and target length. Study its structure
+  carefully. This is **Mimic mode** — the non-negotiable rule applies (see top).
+
+**If they choose (b) inspiration:**
+- Read **all** sample bids and deduce their shared winning pattern: how they open
+  (the hook), how they establish credibility, how they address the client's problem,
+  their calls to action, tone, and typical length.
+- You will synthesize your own structure from this in Step 8. This is **Inspiration
+  mode** — you are not bound to any single sample's format.
+
+Remember the user's choice; Step 8 branches on it.
 
 ## Step 5 — Analyze the job
 
@@ -132,10 +157,17 @@ Before drafting, prompt the user if anything is weak or ambiguous:
 
 ## Step 8 — Draft the bid
 
-Write the bid:
-- **Format:** strictly mirror the chosen sample bid — exact structure, sections,
-  ordering, and style. (See the non-negotiable rule above.)
-- **Length:** match the sample bid's length.
+Write the bid according to the mode chosen in Step 4:
+
+- **Format (Mimic mode):** strictly mirror the chosen sample bid — exact structure,
+  sections, ordering, and style. (See the non-negotiable rule above.) Match that
+  sample's length.
+- **Format (Inspiration mode):** build your own structure from the pattern you
+  deduced across all samples. Open with a **strong, specific hook** (not a generic
+  "I'm excited to apply"), follow the persuasion beats the samples share (credibility,
+  understanding of the client's problem, proof, clear next step), and keep it around
+  the samples' typical length. Aim for catchy and memorable while still grounded in
+  the profile's voice and the matched project evidence.
 - **Voice:** use the chosen profile's voice and positioning, and follow the
   **Sound human, not AI-generated** rules above — no em-dash spam, no buzzwords, no
   robotic parallelism. It must not read as AI-written.
@@ -148,8 +180,9 @@ Write the bid:
 
 ## Step 9 — Refine
 
-Show the draft and iterate on the user's feedback. Keep every revision strictly
-within the sample bid's format.
+Show the draft and iterate on the user's feedback. In Mimic mode, keep every
+revision strictly within the chosen sample's format. In Inspiration mode, keep
+revisions consistent with the synthesized structure and hook.
 
 ## Step 10 — Save
 

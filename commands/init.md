@@ -1,5 +1,5 @@
 ---
-description: Scaffold the bid-resources knowledge base (case studies, projects, sample bids, profiles)
+description: Scaffold the bid-resources knowledge base (projects, sample bids, profiles)
 ---
 
 You are initializing the **bid-resources** knowledge base for the ai-bid-gen plugin.
@@ -8,9 +8,6 @@ Create the following directory structure in the current working directory. If a 
 
 ```
 bid-resources/
-├── case-studies/
-│   ├── README.md
-│   └── _template.md
 ├── projects/
 │   ├── README.md
 │   └── _template.md
@@ -24,44 +21,21 @@ bid-resources/
 
 ## File contents
 
-### bid-resources/case-studies/README.md
-```md
-# Case Studies
-
-One file per case study. These are matched to a job by **problem type** — when a
-job describes a problem you've already solved, the matching case study is pulled
-into the bid as proof.
-
-Copy `_template.md` to a new file (e.g. `realtime-chat-scaling.md`) and fill it in.
-```
-
-### bid-resources/case-studies/_template.md
-```md
-# <Case study title>
-
-## Problem
-<The problem the client faced. Be specific about the pain / challenge.>
-
-## Solution
-<What you did to solve it. Approach, key decisions.>
-
-## Tech used
-<Languages, frameworks, services.>
-
-## Outcome / Results
-<Measurable results — %, time saved, revenue, scale, uptime, etc.>
-
-## Link
-<Optional: live URL, repo, or reference.>
-```
-
 ### bid-resources/projects/README.md
 ```md
 # Projects
 
-One file per project. These establish **credibility and tech match** — when a
-job's tech stack overlaps with a project, it's cited to show you've shipped this
-kind of work, ideally with a live URL.
+One file per project. Each project is **both** a credibility signal *and* a case
+study — it establishes tech match (what you've shipped, ideally with a live URL)
+and tells the story of the problem you solved and the outcome you drove.
+
+A project is matched to a job on **either axis**:
+- by **problem type** — when a job describes a problem this project solved, and
+- by **tech stack** — when a job's stack overlaps with this project's.
+
+Fill in as much as you have. A rich project fills every section (problem +
+outcome + live URL). A breadth-only portfolio entry can leave **Problem** and
+**Outcome / Results** empty and just carry the overview, tech stack, and URL.
 
 Copy `_template.md` to a new file (e.g. `acme-dashboard.md`) and fill it in.
 ```
@@ -73,14 +47,22 @@ Copy `_template.md` to a new file (e.g. `acme-dashboard.md`) and fill it in.
 ## Overview
 <What the project is, in 2-4 sentences.>
 
-## Responsibilities
-<What you / your team were responsible for.>
+## Problem
+<The problem the client / business faced. Be specific about the pain / challenge.
+Leave empty for a breadth-only portfolio entry.>
+
+## Solution / Responsibilities
+<What you did to solve it — approach, key decisions, what you were responsible for.>
 
 ## Tech stack
 <Languages, frameworks, infra, databases, services.>
 
+## Outcome / Results
+<Measurable results — %, time saved, revenue, scale, uptime, etc. Leave empty if
+you don't have a measured outcome for this one.>
+
 ## Production URLs
-<Live links to the deployed product.>
+<Live links to the deployed product. Optional.>
 ```
 
 ### bid-resources/sample-bids/README.md

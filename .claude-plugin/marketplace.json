@@ -1,0 +1,15 @@
+{
+  "name": "ai-bid-gen",
+  "owner": {
+    "name": "Evolvan",
+    "email": "bharatv@evolvan.com",
+    "url": "https://evolvan.com/"
+  },
+  "plugins": [
+    {
+      "name": "ai-bid-gen",
+      "source": "./",
+      "description": "Helps write bids based on information you provide. Scaffolds input directories, then uses skills to generate bids from that information."
+    }
+  ]
+}

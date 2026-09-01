@@ -1,9 +1,9 @@
 # ai-bid-gen
 
-Write winning bids and proposals from information you already have — case studies,
-projects, accepted sample bids, and profiles. You paste a job description, pick a
-profile, and it drafts a proposal that **strictly follows the format of your
-accepted sample bids**, backed by the most relevant case studies and projects.
+Write winning bids and proposals from information you already have — projects
+(each doubling as a case study), accepted sample bids, and profiles. You paste a
+job description, pick a profile, and it drafts a proposal that **strictly follows
+the format of your accepted sample bids**, backed by your most relevant projects.
 
 ## Model-agnostic
 
@@ -12,15 +12,16 @@ instruction files, so **any AI coding assistant can use it** — Claude Code, Co
 Cursor, or anything else that can read files and follow instructions.
 
 - **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`
-  command and the `write-bid` skill automatically.
+  and `/ai-bid-gen:write-bid` commands (plus the `write-bid`, `find-evidence`, and
+  `humanize` skills) automatically.
 - **Any other model/tool:** point the model at the instruction files directly
   (below). The behavior is identical because the files are the source of truth.
 
 ## How it works
 
 ```
-1. Set up the knowledge base   →  creates bid-resources/ with 4 folders
-2. Populate it                 →  drop in your case studies, projects, sample bids, profiles
+1. Set up the knowledge base   →  creates bid-resources/ with 3 folders
+2. Populate it                 →  drop in your projects, sample bids, profiles
 3. Write a bid                 →  paste a job description → get a tailored proposal
 ```
 
@@ -28,8 +29,9 @@ Cursor, or anything else that can read files and follow instructions.
 
 ```
 bid-resources/
-├── case-studies/   # problems you've solved — matched to a job by PROBLEM TYPE
-├── projects/       # overview, responsibilities, tech stack, production URLs — matched by TECH
+├── projects/       # each project is both a case study AND a credibility signal —
+│                   # problem, solution, tech stack, outcome, production URL.
+│                   # Matched to a job by PROBLEM TYPE and/or TECH.
 ├── sample-bids/    # bids you already submitted AND won — the exact FORMAT to mirror
 └── profiles/       # each profile's URL, intro, description, hourly rate, skills — the VOICE + rate
 ```
@@ -42,18 +44,23 @@ showing the fields to fill in.
 1. Verifies `bid-resources/` exists.
 2. Asks you to **paste** the job description (no URL crawling — paste is reliable).
 3. **You choose the profile** to bid as.
-4. Picks the **sample bid to mirror** (asks which one if you have several).
-5. Analyzes the job and matches relevant **case studies** (by problem) and
-   **projects** (by tech stack).
-6. **Warns you** if evidence is missing (e.g. no case study backs the problem, no
-   project uses the tech) and **asks clarifying questions** when anything is unclear.
-7. Drafts the bid — **strictly following the sample bid's exact format and length**,
-   in the chosen profile's voice. Pricing is included **only if the job asked** about
+4. Asks **how to use your samples** — either **mimic one specific sample** (copy its
+   exact format) or **take inspiration from all of them** and craft a fresh, catchy
+   bid with a strong hook from the pattern they share.
+5. Analyzes the job and matches relevant **projects** — by problem type and/or by
+   tech stack (each project doubles as a case study). It also **flags any hidden
+   "prove you're human" instructions** planted in the job post and asks you how to
+   handle them.
+6. **Warns you** if evidence is missing (e.g. no project backs the problem or uses
+   the tech) and **asks clarifying questions** when anything is unclear.
+7. Drafts the bid in the chosen profile's voice, written to **read as human, not
+   AI-generated**. Pricing is included **only if the job asked** about
    rate/budget/hours.
 8. Refines on your feedback and saves to `bids/<job-slug>/bid.md`.
 
-> **The one hard rule:** the generated bid mirrors your chosen sample bid's format
-> exactly — same structure, sections, ordering, and style. Only the content changes.
+> **Mimic mode** reproduces your chosen sample's format exactly — same structure,
+> sections, ordering, and style; only the content changes. **Inspiration mode**
+> builds its own best-of structure from the shared DNA of all your winning samples.
 
 ## Install
 
@@ -71,8 +78,8 @@ Then, inside the project where you keep your bid materials:
 # ...populate the folders...
 ```
 
-To write a bid, just ask: *"write a bid for this job"* and paste the description —
-the `write-bid` skill takes over.
+To write a bid, run `/ai-bid-gen:write-bid` (or just ask: *"write a bid for this
+job"*) and paste the description — the `write-bid` skill takes over.
 
 ### Any other model (Codex, Cursor, etc.) — manual use
 
@@ -83,7 +90,7 @@ the `write-bid` skill takes over.
 2. **Set up the knowledge base** — tell your model:
    > "Follow the instructions in `ai-bid-gen/commands/init.md`."
 
-   It will create `bid-resources/` with the four folders and templates.
+   It will create `bid-resources/` with the three folders and templates.
 3. **Populate** the folders with your real content.
 4. **Write a bid** — tell your model:
    > "Follow the instructions in `ai-bid-gen/skills/write-bid/SKILL.md` to write a
@@ -97,11 +104,23 @@ you use.
 ```
 ai-bid-gen/
 ├── .claude-plugin/
+│   ├── marketplace.json     # marketplace manifest (required for remote install)
 │   └── plugin.json          # plugin manifest
 ├── commands/
-│   └── init.md              # scaffolds the bid-resources/ knowledge base
+│   ├── init.md              # scaffolds the bid-resources/ knowledge base
+│   └── write-bid.md         # runs the write-bid skill
 ├── skills/
-│   └── write-bid/
-│       └── SKILL.md         # writes a bid from the knowledge base
+│   ├── write-bid/
+│   │   └── SKILL.md         # orchestrator: runs the full bid flow
+│   ├── find-evidence/
+│   │   └── SKILL.md         # find & rank relevant projects/profile for any input
+│   └── humanize/
+│       └── SKILL.md         # make any output read human, not AI-generated
+├── LICENSE
 └── README.md
 ```
+
+The `write-bid` skill is an **orchestrator** — it composes two reusable skills:
+`find-evidence` (the "find & fetch" retrieval step) and `humanize` (the anti-AI-tell
+voice rules). Both are useful on their own and are the foundation for future outputs
+(cover letters, resumes) that draw from the same knowledge base.

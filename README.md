@@ -12,14 +12,14 @@ instruction files, so **any AI coding assistant can use it** — Claude Code, Co
 Cursor, or anything else that can read files and follow instructions.
 
 - **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`
-  command and the `write-bid` skill automatically.
+  and `/ai-bid-gen:write-bid` commands (plus the `write-bid` skill) automatically.
 - **Any other model/tool:** point the model at the instruction files directly
   (below). The behavior is identical because the files are the source of truth.
 
 ## How it works
 
 ```
-1. Set up the knowledge base   →  creates bid-resources/ with 4 folders
+1. Set up the knowledge base   →  creates bid-resources/ with 3 folders
 2. Populate it                 →  drop in your projects, sample bids, profiles
 3. Write a bid                 →  paste a job description → get a tailored proposal
 ```
@@ -77,8 +77,8 @@ Then, inside the project where you keep your bid materials:
 # ...populate the folders...
 ```
 
-To write a bid, just ask: *"write a bid for this job"* and paste the description —
-the `write-bid` skill takes over.
+To write a bid, run `/ai-bid-gen:write-bid` (or just ask: *"write a bid for this
+job"*) and paste the description — the `write-bid` skill takes over.
 
 ### Any other model (Codex, Cursor, etc.) — manual use
 
@@ -89,7 +89,7 @@ the `write-bid` skill takes over.
 2. **Set up the knowledge base** — tell your model:
    > "Follow the instructions in `ai-bid-gen/commands/init.md`."
 
-   It will create `bid-resources/` with the four folders and templates.
+   It will create `bid-resources/` with the three folders and templates.
 3. **Populate** the folders with your real content.
 4. **Write a bid** — tell your model:
    > "Follow the instructions in `ai-bid-gen/skills/write-bid/SKILL.md` to write a
@@ -106,9 +106,11 @@ ai-bid-gen/
 │   ├── marketplace.json     # marketplace manifest (required for remote install)
 │   └── plugin.json          # plugin manifest
 ├── commands/
-│   └── init.md              # scaffolds the bid-resources/ knowledge base
+│   ├── init.md              # scaffolds the bid-resources/ knowledge base
+│   └── write-bid.md         # runs the write-bid skill
 ├── skills/
 │   └── write-bid/
 │       └── SKILL.md         # writes a bid from the knowledge base
+├── LICENSE
 └── README.md
 ```

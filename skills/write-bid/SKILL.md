@@ -62,6 +62,19 @@ Check that `bid-resources/` exists with `projects/`, `sample-bids/`, and
 If it's missing, tell the user to set it up first (run `/ai-bid-gen:init` in Claude
 Code, or follow the instructions in `commands/init.md` with any other model), then stop.
 
+**Only real content counts.** Every folder ships with a `README.md` and a
+`_template.md` — these are scaffolding, NOT user content. Whenever you list, count,
+or read from `projects/`, `sample-bids/`, or `profiles/`, **ignore `README.md` and
+`_template.md`** (and any file whose body is still the unedited template
+placeholders). A folder that contains only those files is **empty** for our purposes.
+
+If a folder needed for the current step has no real content, STOP and tell the user
+plainly what to add, e.g.:
+> "Your `sample-bids/` folder has no real bids yet (only the template). Add at least
+> one won bid there, then run this again." 
+Do the same for an empty `profiles/`. If `projects/` is empty, warn the user the bid
+will have no proof and ask whether to proceed anyway.
+
 ## Step 2 — Get the job description
 
 Ask the user to paste the **job description** if they haven't already. Do NOT try
@@ -69,14 +82,17 @@ to fetch it from a URL — paste only.
 
 ## Step 3 — Select the profile (user chooses — no auto best-match)
 
-List the available profiles from `bid-resources/profiles/` and ask the user which
-profile they are bidding as. Do NOT pick the "best matching" profile automatically
+List the available profiles from `bid-resources/profiles/` (ignoring `README.md` and
+`_template.md` — see Step 1) and ask the user which profile they are bidding as. If
+there are no real profiles, stop and tell the user to add one. Do NOT pick the "best matching" profile automatically
 — the user selects. Read the chosen profile file for its voice, headline, intro
 style, skills, and hourly rate.
 
 ## Step 4 — Choose how to use the samples
 
-Read `bid-resources/sample-bids/`. Then ask the user which approach they want:
+Read `bid-resources/sample-bids/`, counting only real bids (ignore `README.md` and
+`_template.md` — see Step 1). If there are no real samples, stop and tell the user to
+add at least one won bid first. Otherwise ask the user which approach they want:
 
 > "Do you want me to **(a) mimic one specific sample** — copy its exact format — or
 > **(b) take inspiration from all your samples** and craft a fresh, catchy bid from

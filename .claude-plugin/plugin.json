@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Helps write bids based on information you provide. Scaffolds input directories, then uses skills to generate bids from that information.",
   "author": {
-    "name": "bharat",
-    "email": "bharatv@evolvan.com"
+    "name": "Evolvan",
+    "email": "bharatv@evolvan.com",
+    "url": "https://evolvan.com/"
   },
   "homepage": "https://github.com/bharatevo1508/ai-bid-gen",
   "repository": "https://github.com/bharatevo1508/ai-bid-gen",

@@ -1,8 +1,9 @@
 {
   "name": "ai-bid-gen",
   "owner": {
-    "name": "bharat",
-    "email": "bharatv@evolvan.com"
+    "name": "Evolvan",
+    "email": "bharatv@evolvan.com",
+    "url": "https://evolvan.com/"
   },
   "plugins": [
     {

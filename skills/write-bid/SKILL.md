@@ -58,8 +58,14 @@ fetch it from a URL — paste only.
 
 From the pasted job description, extract:
 - The **tone** the client uses
-- Whether the job **explicitly asks about rate / pricing / budget / hours** (this
-  determines whether pricing appears in the bid at all — see Step 7)
+- Whether the job **explicitly asks the applicant to state their rate / quote / hours**
+  (this determines whether pricing appears in the bid at all — see Step 7).
+  **A posted budget or rate range is NOT such a request.** A client writing "$25–$45/hr"
+  or "budget: $2,000" is stating *their* number, not asking for *yours*. The pricing
+  gate opens only when the job asks the applicant a direct question like "what's your
+  rate?", "how much do you charge?", "include your hourly rate", or "quote a fixed
+  price". If the job merely posts a range, mentions a budget, or says it will pay more
+  for the right person, the gate stays **closed** — do not volunteer a number.
 
 (The problem and tech stack are extracted by `find-evidence` in Step 4.)
 
@@ -94,10 +100,14 @@ which to include; carry the profile fit notes into Step 5 and the gaps into Step
 
 ## Step 5 — Select the profile and the sample mode
 
-**Profile (user chooses — no auto best-match).** Using the profile fit notes from
-Step 4, ask the user which profile they are bidding as. Do NOT pick the "best matching"
-profile automatically — the user selects. Read the chosen profile file for its voice,
-headline, intro style, skills, and hourly rate.
+**Profile (user chooses — no auto best-match).** List **every** real profile from
+`bid-resources/profiles/` (ignore scaffolding) — do not silently drop or omit any — and
+ask the user which profile they are bidding as. Do NOT pick the "best matching" profile
+automatically, and do NOT steer: present each profile's fit **factually** (skills/tech
+overlap with the job) without ranking language, superlatives, or a recommendation. Do
+not call one the "strongest fit," "best," or "weakest" — those steer the reader toward a
+choice that is the user's to make. Once the user picks, read the chosen profile file for
+its voice, headline, intro style, skills, and hourly rate.
 
 **Sample mode.** Read `bid-resources/sample-bids/` (real bids only — ignore scaffolding).
 If there are no real samples, stop and tell the user to add at least one won bid first.
@@ -124,7 +134,11 @@ Before drafting, prompt the user if anything is weak or ambiguous:
   lacks key info, TELL the user plainly, e.g.:
   > "Heads up — I couldn't find a project backing <problem>, and none use <tech>. The
   > bid will be weaker without proof. Do you want to add one, or proceed anyway?"
-  Name exactly what's missing. Let the user add material or proceed.
+  Name exactly what's missing. The only routes you may offer are: **add real material**,
+  **proceed with honest framing** (acknowledge the gap or lead with adjacent proof), or
+  **skip this job**. **Never** offer to fabricate — do not present "claim <tech> without a
+  project" or any invented experience as an option. The bid must never assert experience
+  the knowledge base does not support.
 - **Ambiguity:** if any part of the job is unclear (scope, which deliverable, which
   project to highlight), ask clarifying questions rather than guessing.
 
@@ -134,7 +148,8 @@ Write the bid according to the mode chosen in Step 5:
 
 - **Format (Mimic mode):** strictly mirror the chosen sample bid — exact structure,
   sections, ordering, and style. (See the non-negotiable rule above.) Match that
-  sample's length.
+  sample's length within **±15%** of its word count. Before showing the draft, run the
+  mimic-mode verification checkpoint below.
 - **Format (Inspiration mode):** build your own structure from the pattern you deduced
   across all samples. Open with a **strong, specific hook** (not a generic "I'm excited
   to apply"), follow the persuasion beats the samples share (credibility, understanding
@@ -146,15 +161,35 @@ Write the bid according to the mode chosen in Step 5:
   buzzwords, no robotic parallelism. It must not read as AI-written.
 - **Evidence:** weave in the projects confirmed in Step 4 as proof — their
   problem/outcome story and production URLs where relevant.
-- **Pricing / rate:** include pricing ONLY if the job description explicitly asked about
-  rate, budget, or hours. If it asked, address it using the profile's hourly rate (and
-  estimate hours/total only if the job is fixed-price and pricing detail is requested).
-  If the job did not ask, do NOT mention rate at all.
+- **Pricing / rate:** include pricing ONLY if the job explicitly asked the applicant to
+  state their rate/quote (see the Step 3 test). If it asked, address it using the
+  profile's hourly rate (and estimate hours/total only if the job is fixed-price and
+  pricing detail is requested). If the job did not ask — including when it merely posts a
+  budget or a range, or says it will pay more for the right person — do NOT mention rate,
+  a number, or your positioning on price **at all**, even to say you're a good value or
+  won't mark up. A posted range is not an invitation to respond with your own figure.
+
+## Step 7a — Mimic-mode verification checkpoint (Mimic mode only)
+
+Before showing a mimic-mode draft, verify it against the chosen sample and **state the
+numbers** — never claim parity without measuring it:
+
+1. **Word count.** Count the sample's words and the draft's words. The draft must be
+   within **±15%** of the sample. If it is outside the band, revise (cut or expand) until
+   it is inside, then re-count. Do not proceed on a draft that fails the band.
+2. **Section parity.** List the sample's sections/blocks in order, then the draft's. They
+   must match **1:1** — same count, same types, same order. No section added, none
+   dropped. If they differ, fix the draft.
+3. **Report honestly.** When you present the draft, state the actual figures, e.g.
+   "sample 287 words / draft 305 words (+6%), 9 blocks in the same order." Do NOT write
+   "comparable length" or "same length" unless the counts back it up. A false parity
+   claim is worse than a visible miss, because it tells the user not to re-check.
 
 ## Step 8 — Refine
 
 Show the draft and iterate on the user's feedback. In Mimic mode, keep every revision
-strictly within the chosen sample's format. In Inspiration mode, keep revisions
+strictly within the chosen sample's format **and re-run the Step 7a checkpoint** after
+any change that could affect length or sections. In Inspiration mode, keep revisions
 consistent with the synthesized structure and hook. Keep applying `humanize` on every
 revision.
 

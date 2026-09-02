@@ -11,9 +11,10 @@ This plugin is **not tied to Claude**. All of its logic lives in plain Markdown
 instruction files, so **any AI coding assistant can use it** — Claude Code, Codex,
 Cursor, or anything else that can read files and follow instructions.
 
-- **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`
-  and `/ai-bid-gen:write-bid` commands (plus the `write-bid`, `find-evidence`, and
-  `humanize` skills) automatically.
+- **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`,
+  `/ai-bid-gen:organize-kb`, and `/ai-bid-gen:write-bid` commands (plus the `write-bid`,
+  `find-evidence`, `humanize`, `enrich-kb`, `build-index`, and `lint-kb` skills)
+  automatically.
 - **Any other model/tool:** point the model at the instruction files directly
   (below). The behavior is identical because the files are the source of truth.
 
@@ -21,9 +22,13 @@ Cursor, or anything else that can read files and follow instructions.
 
 ```
 1. Set up the knowledge base   →  creates bid-resources/ with 3 folders
-2. Populate it                 →  drop in your projects, sample bids, profiles
-3. Write a bid                 →  paste a job description → get a tailored proposal
+2. Populate it                 →  drop in your projects, sample bids, profiles (plain prose)
+3. Organize it                 →  auto-adds frontmatter + builds an index for fast retrieval
+4. Write a bid                 →  paste a job description → get a tailored proposal
 ```
+
+You write your projects as plain prose — you never author frontmatter yourself.
+Step 3 reads that prose and structures it for you.
 
 ### The knowledge base
 
@@ -74,9 +79,14 @@ showing the fields to fill in.
 Then, inside the project where you keep your bid materials:
 
 ```
-/ai-bid-gen:init      # scaffold bid-resources/
-# ...populate the folders...
+/ai-bid-gen:init         # scaffold bid-resources/
+# ...populate the folders with plain-prose projects, bids, profiles...
+/ai-bid-gen:organize-kb  # structure the KB: auto-add frontmatter + build the index
 ```
+
+Re-run `/ai-bid-gen:organize-kb` any time you add or edit projects — it only enriches
+new/changed files and refreshes the index. **Already have a v1.0 knowledge base?** Just
+reload the plugin and run it once to upgrade your existing projects.
 
 To write a bid, run `/ai-bid-gen:write-bid` (or just ask: *"write a bid for this
 job"*) and paste the description — the `write-bid` skill takes over.
@@ -91,8 +101,13 @@ job"*) and paste the description — the `write-bid` skill takes over.
    > "Follow the instructions in `ai-bid-gen/commands/init.md`."
 
    It will create `bid-resources/` with the three folders and templates.
-3. **Populate** the folders with your real content.
-4. **Write a bid** — tell your model:
+3. **Populate** the folders with your real content (plain prose is fine).
+4. **Organize the knowledge base** — tell your model:
+   > "Follow the instructions in `ai-bid-gen/commands/organize-kb.md`."
+
+   It reads your project prose, adds retrieval frontmatter, builds the index, and
+   reports any gaps.
+5. **Write a bid** — tell your model:
    > "Follow the instructions in `ai-bid-gen/skills/write-bid/SKILL.md` to write a
    > bid for this job:" and paste the job description.
 
@@ -108,19 +123,30 @@ ai-bid-gen/
 │   └── plugin.json          # plugin manifest
 ├── commands/
 │   ├── init.md              # scaffolds the bid-resources/ knowledge base
+│   ├── organize-kb.md       # orchestrator: enrich + index + lint the knowledge base
 │   └── write-bid.md         # runs the write-bid skill
 ├── skills/
 │   ├── write-bid/
 │   │   └── SKILL.md         # orchestrator: runs the full bid flow
 │   ├── find-evidence/
 │   │   └── SKILL.md         # find & rank relevant projects/profile for any input
-│   └── humanize/
-│       └── SKILL.md         # make any output read human, not AI-generated
+│   ├── humanize/
+│   │   └── SKILL.md         # make any output read human, not AI-generated
+│   ├── enrich-kb/
+│   │   └── SKILL.md         # read project prose → add structured frontmatter
+│   ├── build-index/
+│   │   └── SKILL.md         # generate projects/INDEX.md for fast retrieval
+│   └── lint-kb/
+│       └── SKILL.md         # audit the KB and report gaps (never fills them)
 ├── LICENSE
 └── README.md
 ```
 
-The `write-bid` skill is an **orchestrator** — it composes two reusable skills:
-`find-evidence` (the "find & fetch" retrieval step) and `humanize` (the anti-AI-tell
-voice rules). Both are useful on their own and are the foundation for future outputs
+The plugin uses an **orchestrator + reusable skills** pattern:
+- `write-bid` composes `find-evidence` (the "find & fetch" retrieval step) and
+  `humanize` (the anti-AI-tell voice rules).
+- `organize-kb` composes `enrich-kb`, `build-index`, and `lint-kb` to turn a
+  plain-prose knowledge base into a retrieval-ready one.
+
+The reusable skills are useful on their own and are the foundation for future outputs
 (cover letters, resumes) that draw from the same knowledge base.

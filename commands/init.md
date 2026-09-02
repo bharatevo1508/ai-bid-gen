@@ -38,6 +38,9 @@ outcome + live URL). A breadth-only portfolio entry can leave **Problem** and
 **Outcome / Results** empty and just carry the overview, tech stack, and URL.
 
 Copy `_template.md` to a new file (e.g. `acme-dashboard.md`) and fill it in.
+Just write the prose — you do **not** need to add any structured frontmatter by
+hand. After adding or editing projects, run `/ai-bid-gen:organize-kb`; it reads
+your prose, adds the frontmatter used for fast retrieval, and builds an index.
 ```
 
 ### bid-resources/projects/_template.md
@@ -126,4 +129,4 @@ Copy `_template.md` to a new file (e.g. `senior-fullstack.md`) and fill it in.
 
 ## After creating
 
-Report back a summary of what was created (and what already existed and was skipped), then tell the user to populate the folders with their real content and run the bid generation skill when ready.
+Report back a summary of what was created (and what already existed and was skipped), then tell the user to populate the folders with their real content. Once projects are added, they should run `/ai-bid-gen:organize-kb` to structure the knowledge base for retrieval, then run the bid generation skill when ready.

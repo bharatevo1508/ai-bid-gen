@@ -1,6 +1,6 @@
 {
   "name": "ai-bid-gen",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Helps write bids based on information you provide. Scaffolds input directories, then uses skills to generate bids from that information.",
   "author": {
     "name": "Evolvan",

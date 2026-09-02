@@ -33,14 +33,24 @@ the caller already passed these extracted, use them instead of re-deriving.
 
 ## Step 2 — Rank the projects
 
-Scan `bid-resources/projects/`. Each project is both a case study and a credibility
-signal, so match on **any relevant axis**:
-- by **problem / topic** — the project's *Problem / Outcome* relates to the input, and/or
-- by **tech / skills** — the project's *Tech stack* overlaps the input.
+**Use the index if it exists.** If `bid-resources/projects/INDEX.md` is present, read it
+first — it carries each project's structured frontmatter (tech, domain, problem_tags,
+has_outcome, url). Rank off the index, then open in full **only** the top candidates you
+shortlist. This avoids reading every project on a large knowledge base. If there is no
+`INDEX.md` (the user hasn't run `/ai-bid-gen:organize-kb` yet), fall back to scanning the
+project files directly — behavior is the same, just slower. Either way, ignore any
+project that is missing from the index but present as a file, and vice versa; the file is
+the source of truth for content, so if in doubt, read the file.
+
+Each project is both a case study and a credibility signal, so match on **any relevant
+axis**:
+- by **problem / topic** — the project's `problem_tags` / *Problem / Outcome* relate to
+  the input, and/or
+- by **tech / skills** — the project's `tech` / *Tech stack* overlaps the input.
 
 Prefer projects that match on **multiple** axes, and prefer ones with a **measured
-outcome** and a **live production URL**. Return them ranked, each with a one-line reason
-it matched.
+outcome** (`has_outcome: true`) and a **live production URL** (`url` set). Return them
+ranked, each with a one-line reason it matched.
 
 ## Step 3 — Surface profile fit
 

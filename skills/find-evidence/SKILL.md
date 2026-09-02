@@ -44,10 +44,13 @@ it matched.
 
 ## Step 3 — Surface profile fit
 
-List the available profiles from `bid-resources/profiles/` (ignoring scaffolding), each
-with a short note on how well it fits the input (skills overlap, positioning). Do
-**NOT** auto-select a profile — the caller or user chooses. This step only informs that
-choice. Skip it if profile fit is irrelevant to the caller's purpose.
+List **every** real profile from `bid-resources/profiles/` (ignoring scaffolding) — do
+not drop or omit any — each with a short, **factual** note on its fit (which of the
+input's skills/tech it overlaps). Do **NOT** auto-select a profile — the caller or user
+chooses. Keep the notes neutral: no ranking, no superlatives, no "strongest/best/weakest
+fit," no recommendation. State overlap, not a verdict; the choice is the user's. This
+step only informs that choice. Skip it if profile fit is irrelevant to the caller's
+purpose.
 
 ## Step 4 — Report gaps
 
@@ -56,7 +59,9 @@ Flag weaknesses plainly:
 - No project uses the relevant **tech / skills**.
 - No profile is a strong fit.
 
-Name exactly what's missing so the caller can decide to add material or proceed.
+Name exactly what's missing so the caller can decide to add material or proceed. Report
+gaps as facts — never suggest filling a gap by claiming unsupported experience or
+inventing a project. Fabrication is not a remedy.
 
 ## Output
 

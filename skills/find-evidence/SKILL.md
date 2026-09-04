@@ -62,6 +62,16 @@ fit," no recommendation. State overlap, not a verdict; the choice is the user's.
 step only informs that choice. Skip it if profile fit is irrelevant to the caller's
 purpose.
 
+### Suggested attachments
+
+If a profile has a `## Portfolio items` array, intersect it with the projects you just
+ranked and report the overlap separately, as **suggested attachments** — the portfolio
+pieces already live on that profile that back the evidence being cited. Keep it apart
+from the evidence shortlist: one is what the bid says, the other is what gets attached to
+it. Report only names that appear in the array; a project that is not in it has no
+attachable piece, which belongs in Step 4 as a gap. A name in the array that matches no
+file in `projects/` is also a gap, not a project to invent.
+
 ## Step 4 — Report gaps
 
 Flag weaknesses plainly:

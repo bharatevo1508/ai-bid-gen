@@ -148,10 +148,12 @@ automatically, and do NOT steer: present each profile's fit **factually** (skill
 overlap with the job) without ranking language, superlatives, or a recommendation. Do
 not call one the "strongest fit," "best," or "weakest" — those steer the reader toward a
 choice that is the user's to make. Once the user picks, read the chosen profile file for
-its voice, headline, intro style, skills, hourly rate, and its `## GitHub / website` link.
-Treat both new fields as optional in older knowledge bases: if the section is absent or
-still holds the template placeholder, the profile simply has no link on record — say so
-when it matters, and never invent one.
+its voice, headline, intro style, skills, hourly rate, its `## GitHub / website` link, and
+its `## Portfolio items` array (the projects already published on that Upwork profile,
+named by their file in `bid-resources/projects/`). Treat both of those fields as optional
+in older knowledge bases: if a section is absent or still holds the template placeholder,
+the profile simply has nothing on record there — say so when it matters, and never invent
+a link or a portfolio entry.
 
 **Sample mode.** Read `bid-resources/sample-bids/` (real bids only — ignore scaffolding).
 If there are no real samples, stop and tell the user to add at least one won bid first.
@@ -281,6 +283,19 @@ strictly within the chosen sample's format **and re-run the Step 7a checkpoint**
 any change that could affect length or sections. In Inspiration mode, keep revisions
 consistent with the synthesized structure and hook. Keep applying `humanize` on every
 revision.
+
+### Suggested attachments
+
+With the final draft, tell the user which portfolio pieces to attach: the entries in the
+chosen profile's `## Portfolio items` that back the projects the bid actually cites, each
+named with the claim it proves. Suggest **only** names present in that array — those are
+the pieces that already exist on the profile and can be attached. If a cited project is
+not in the array, say so plainly ("`realtime-sync` is cited but isn't a portfolio item on
+this profile, so there's nothing to attach for it") and record it as a gap for Step 9's
+`## Gaps to fix in the knowledge base`. Never invent a portfolio piece, and never suggest
+attaching something the array does not list. The attachments are advice to the user —
+they are named in `notes.md`, never inside `bid.md`.
+
 ## Step 9 — Save
 
 Once the user is happy, save to `bids/<NNN>/` — a zero-padded, three-digit sequential ID.
@@ -322,6 +337,8 @@ answers file.
 - Which profile you bid as, and which mode (Mimic or Inspiration) you used.
 - The pricing decision and the reason for it.
 - Evidence used — which projects you drew on.
+- Suggested attachments — the portfolio items from Step 8, and any cited project that had
+  none.
 - Gaps declared in the bid, and any gap you left undeclared.
 
 Then a section of its own, written on **every** run:

@@ -62,14 +62,16 @@ showing the fields to fill in.
 7. Drafts the bid in the chosen profile's voice, written to **read as human, not
    AI-generated**. Pricing is included **only if the job asked** about
    rate/budget/hours.
-8. Refines on your feedback and saves to `bids/<NNN>/` — a sequential numbered folder
+8. Tells you **which portfolio pieces to attach** — the items already published on the
+   profile you bid as that back the projects the bid cites.
+9. Refines on your feedback and saves to `bids/<NNN>/` — a sequential numbered folder
    holding `jd.md` (the post, verbatim), `bid.md` (the bid text alone, ready to copy and
    send) and `notes.md` (context, decisions, and a *gaps to fix in the knowledge base*
    list naming the exact files to add or improve before the next bid).
-9. Need a paste-ready version? Run `/ai-bid-gen:md-to-txt bids/<NNN>/bid.md` — it writes
-   `bid.txt` beside the source with the markdown stripped and paragraphs unwrapped, so it
-   pastes cleanly into Google Docs or an application form. Saving a bid never produces a
-   `.txt` on its own.
+10. Need a paste-ready version? Run `/ai-bid-gen:md-to-txt bids/<NNN>/bid.md` — it writes
+    `bid.txt` beside the source with the markdown stripped and paragraphs unwrapped, so
+    it pastes cleanly into Google Docs or an application form. Saving a bid never
+    produces a `.txt` on its own.
 
 If the post carries its own block of screening questions, the bid keeps the cover letter
 short and answers them as a verbatim `Q:` / `A:` list below the salutation, so each answer

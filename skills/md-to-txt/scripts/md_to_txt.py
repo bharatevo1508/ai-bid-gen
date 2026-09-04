@@ -19,6 +19,7 @@ ORDERED = re.compile(r'^(\s*)(\d+[.)])\s+(.*)$')
 ATX = re.compile(r'^\s{0,3}#{1,6}\s+')
 HRULE = re.compile(r'^\s{0,3}([-*_])(\s*\1){2,}\s*$')
 QUOTE = re.compile(r'^\s{0,3}>\s?')
+QA = re.compile(r'^\s*[QA]\s*[:.)]\s')      # screening-question Q: / A: lines
 LINK = re.compile(r'\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
 IMAGE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
 
@@ -94,7 +95,8 @@ def convert(src, unwrap=None):
             else:
                 kind = 'text'
             if (parsed and kind == 'text' and thresh is not None
-                    and len(parsed[-1][2]) >= thresh):
+                    and len(parsed[-1][2]) >= thresh
+                    and not QA.match(raw)):
                 parsed[-1] = (parsed[-1][0], parsed[-1][1], parsed[-1][2] + ' ' + text)
             else:
                 parsed.append((kind, len(raw) - len(raw.lstrip()), text))

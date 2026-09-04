@@ -70,6 +70,11 @@ showing the fields to fill in.
    pastes cleanly into Google Docs or an application form. Saving a bid never produces a
    `.txt` on its own.
 
+If the post carries its own block of screening questions, the bid keeps the cover letter
+short and answers them as a verbatim `Q:` / `A:` list below the salutation, so each answer
+can go straight into its field. Questions asked inside the post's prose are answered by
+the letter itself.
+
 > **Mimic mode** reproduces your chosen sample's format exactly — same structure,
 > sections, ordering, and style; only the content changes. **Inspiration mode**
 > builds its own best-of structure from the shared DNA of all your winning samples.

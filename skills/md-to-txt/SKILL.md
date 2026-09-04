@@ -44,6 +44,9 @@ Options:
   collapse them together. Numbered lists keep their numbers.
 - Horizontal rules are dropped.
 - Paragraphs hard-wrapped at a fixed column are joined back into one line each.
+- A line starting `Q:` or `A:` always begins its own line in the output, so a
+  screening-question block never collapses into a paragraph. A wrapped answer still joins
+  back into one line.
 - Fenced code blocks and tables are passed through verbatim, keeping their spacing.
 - URLs are left bare so the target application auto-links them.
 

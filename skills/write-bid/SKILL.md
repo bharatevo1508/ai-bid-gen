@@ -191,6 +191,11 @@ Before drafting, prompt the user if anything is weak or ambiguous:
 - **Ambiguity:** if any part of the job is unclear (scope, which deliverable, which
   project to highlight), ask clarifying questions rather than guessing.
 
+Keep this report — it becomes the `## Gaps to fix in the knowledge base` section of
+`notes.md` in Step 9. It covers every kind of gap, not just missing projects: a missing
+`## GitHub / website` link, a project with no measured outcome or no live URL, a cited
+project that is in no profile's `## Portfolio items`.
+
 ## Step 7 — Draft the bid
 
 Write the bid according to the mode chosen in Step 5:
@@ -318,6 +323,20 @@ answers file.
 - The pricing decision and the reason for it.
 - Evidence used — which projects you drew on.
 - Gaps declared in the bid, and any gap you left undeclared.
+
+Then a section of its own, written on **every** run:
+
+```markdown
+## Gaps to fix in the knowledge base
+- No project uses **Next.js App Router** — add one, or note that it's out of scope.
+- `profiles/senior-fullstack.md` has no GitHub / website link; the post asked for one.
+- `projects/realtime-sync.md` has no measured outcome, so the bid had to hedge.
+```
+
+Each line names the **exact file to add or edit** and what is missing from it — this is
+the to-do list for making the next bid stronger, not a post-mortem. Record every gap
+whether or not the user chose to proceed with the bid, and whether or not it was declared
+in the letter. If there were none, write `None` under the heading; never omit the section.
 
 The Step 6 gap report and the Step 5 profile listing are the source material for
 `notes.md`. Write them there rather than dropping them once the draft is approved.

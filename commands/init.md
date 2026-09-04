@@ -98,6 +98,11 @@ One file per Upwork profile. A bid is written **as** a specific profile — usin
 its voice, its advertised skills, and its hourly rate for any pricing. Pick which
 profile you're bidding as when generating a bid.
 
+Two fields are easy to skip and worth filling in: **GitHub / website**, because
+posts regularly demand a link and a missing one gets the application filtered out,
+and **Portfolio items**, which lists the projects already published on this Upwork
+profile so a bid can tell you what to attach.
+
 Copy `_template.md` to a new file (e.g. `senior-fullstack.md`) and fill it in.
 ```
 
@@ -107,6 +112,9 @@ Copy `_template.md` to a new file (e.g. `senior-fullstack.md`) and fill it in.
 
 ## Profile URL
 <Link to the Upwork profile.>
+
+## GitHub / website
+<GitHub profile URL, plus any personal site or portfolio. Leave as-is if there is none.>
 
 ## Title / headline
 <The profile's headline.>

@@ -66,6 +66,12 @@ From the pasted job description, extract:
   rate?", "how much do you charge?", "include your hourly rate", or "quote a fixed
   price". If the job merely posts a range, mentions a budget, or says it will pay more
   for the right person, the gate stays **closed** — do not volunteer a number.
+- Whether the job **requires a link to a GitHub profile, personal website, or portfolio**
+  ("send a link to your GitHub and/or website"). Read this the way the pricing gate is
+  read: a client linking their *own* site is not a request. When it *is* a request, the
+  link comes from the chosen profile's `## GitHub / website` field in Step 5 — and if that
+  field is empty, it is a gap for Step 6, never something to paper over with a project URL
+  or the Upwork profile link.
 
 (The problem and tech stack are extracted by `find-evidence` in Step 4.)
 
@@ -107,7 +113,10 @@ automatically, and do NOT steer: present each profile's fit **factually** (skill
 overlap with the job) without ranking language, superlatives, or a recommendation. Do
 not call one the "strongest fit," "best," or "weakest" — those steer the reader toward a
 choice that is the user's to make. Once the user picks, read the chosen profile file for
-its voice, headline, intro style, skills, and hourly rate.
+its voice, headline, intro style, skills, hourly rate, and its `## GitHub / website` link.
+Treat both new fields as optional in older knowledge bases: if the section is absent or
+still holds the template placeholder, the profile simply has no link on record — say so
+when it matters, and never invent one.
 
 **Sample mode.** Read `bid-resources/sample-bids/` (real bids only — ignore scaffolding).
 If there are no real samples, stop and tell the user to add at least one won bid first.
@@ -139,6 +148,11 @@ Before drafting, prompt the user if anything is weak or ambiguous:
   **skip this job**. **Never** offer to fabricate — do not present "claim <tech> without a
   project" or any invented experience as an option. The bid must never assert experience
   the knowledge base does not support.
+- **Missing profile link:** if the job requires a GitHub/website/portfolio link (Step 3)
+  and the chosen profile's `## GitHub / website` is empty or missing, tell the user
+  plainly — an unanswered mandatory screening item usually means the application is
+  filtered out. Offer to add the link to the profile file, or to state its absence
+  honestly. Do **not** substitute a project URL or the Upwork profile link for it.
 - **Ambiguity:** if any part of the job is unclear (scope, which deliverable, which
   project to highlight), ask clarifying questions rather than guessing.
 

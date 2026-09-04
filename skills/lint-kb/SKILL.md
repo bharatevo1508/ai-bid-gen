@@ -39,6 +39,10 @@ Across `bid-resources/projects/`, `profiles/`, and `sample-bids/`:
 
 **Profiles & sample-bids**
 - Profiles missing a rate, headline, or skills.
+- Profiles with no `## GitHub / website` link — posts ask for one often enough that a
+  missing link costs applications. The section left empty or still holding the template
+  placeholder counts as missing; an explicit "none" satisfies the check. Report it, never
+  fill it in — a guessed URL is worse than no URL.
 - Fewer than ~2 sample bids (mimic/inspiration modes work far better with variety).
 
 ## Output

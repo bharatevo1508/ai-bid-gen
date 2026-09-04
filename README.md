@@ -2,7 +2,7 @@
 
 Write winning bids and proposals from information you already have — projects
 (each doubling as a case study), accepted sample bids, and profiles. You paste a
-job description, pick a profile, and it drafts a proposal that **strictly follows
+job description (or point it at a file), pick a profile, and it drafts a proposal that **strictly follows
 the format of your accepted sample bids**, backed by your most relevant projects.
 
 ## Model-agnostic
@@ -24,7 +24,7 @@ Cursor, or anything else that can read files and follow instructions.
 1. Set up the knowledge base   →  creates bid-resources/ with 3 folders
 2. Populate it                 →  drop in your projects, sample bids, profiles (plain prose)
 3. Organize it                 →  auto-adds frontmatter + builds an index for fast retrieval
-4. Write a bid                 →  paste a job description → get a tailored proposal
+4. Write a bid                 →  paste a job description (or point at a file) → get a proposal
 ```
 
 You write your projects as plain prose — you never author frontmatter yourself.
@@ -47,7 +47,8 @@ showing the fields to fill in.
 ### What the bid generator does
 
 1. Verifies `bid-resources/` exists.
-2. Asks you to **paste** the job description (no URL crawling — paste is reliable).
+2. Takes the job description — **pasted, or a file** you point it at (`@jds/jd-001.md`).
+   No URL crawling: job boards block crawlers, so a link is not accepted.
 3. **You choose the profile** to bid as.
 4. Asks **how to use your samples** — either **mimic one specific sample** (copy its
    exact format) or **take inspiration from all of them** and craft a fresh, catchy
@@ -95,7 +96,8 @@ new/changed files and refreshes the index. **Already have a v1.0 knowledge base?
 reload the plugin and run it once to upgrade your existing projects.
 
 To write a bid, run `/ai-bid-gen:write-bid` (or just ask: *"write a bid for this
-job"*) and paste the description — the `write-bid` skill takes over.
+job"*) and paste the description — or hand it a file: `/ai-bid-gen:write-bid @jds/jd-001.md`.
+The `write-bid` skill takes over from there.
 
 ### Any other model (Codex, Cursor, etc.) — manual use
 
@@ -115,7 +117,7 @@ job"*) and paste the description — the `write-bid` skill takes over.
    reports any gaps.
 5. **Write a bid** — tell your model:
    > "Follow the instructions in `ai-bid-gen/skills/write-bid/SKILL.md` to write a
-   > bid for this job:" and paste the job description.
+   > bid for this job:" and paste the job description (or point it at a file holding it).
 
 That's it — the Markdown files drive the whole process regardless of which model
 you use.

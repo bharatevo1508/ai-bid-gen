@@ -25,6 +25,11 @@ add sections, remove sections, reorder, or introduce a different format under an
 circumstance. That sample is the format authority — mirror it exactly. The only thing
 that changes is the *content*, tailored to this job. No caveats, no diversion.
 
+The sample governs the **cover letter**. If the post carries a separate block of
+screening questions, the Q/A answering them sits below the letter's salutation (Step 7)
+and is not counted as a section added to the sample's format — the letter above it still
+mirrors the sample exactly.
+
 **Inspiration mode.** When the user picks inspiration-from-all, do NOT copy any one
 sample. Instead, study every sample, deduce the winning pattern they share, and craft
 your own best-of structure — a strong hook, the persuasion beats they have in common,
@@ -268,7 +273,8 @@ numbers** — never claim parity without measuring it:
    excluding any Q/A block, which the sample has no counterpart for. The draft must be
    within **±15%** of the sample. If it is outside the band, revise (cut or expand) until
    it is inside, then re-count. Do not proceed on a draft that fails the band.
-2. **Section parity.** List the sample's sections/blocks in order, then the draft's. They
+2. **Section parity.** List the sample's sections/blocks in order, then the draft's —
+   again the letter only, not the Q/A block. They
    must match **1:1** — same count, same types, same order. No section added, none
    dropped. If they differ, fix the draft.
 3. **Report honestly.** When you present the draft, state the actual figures, e.g.

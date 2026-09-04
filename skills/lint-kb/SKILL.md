@@ -39,6 +39,14 @@ Across `bid-resources/projects/`, `profiles/`, and `sample-bids/`:
 
 **Profiles & sample-bids**
 - Profiles missing a rate, headline, or skills.
+- `## Portfolio items` entries that match no file in `projects/` — a rename or a typo,
+  since every entry must name a real project file (report under **Retrieval**).
+- Projects that appear in no profile's `## Portfolio items` — nothing attachable proves
+  them (report as a count under **Strength**).
+- Profiles with no `## GitHub / website` link — posts ask for one often enough that a
+  missing link costs applications. The section left empty or still holding the template
+  placeholder counts as missing; an explicit "none" satisfies the check. Report it, never
+  fill it in — a guessed URL is worse than no URL.
 - Fewer than ~2 sample bids (mimic/inspiration modes work far better with variety).
 
 ## Output

@@ -12,9 +12,9 @@ instruction files, so **any AI coding assistant can use it** — Claude Code, Co
 Cursor, or anything else that can read files and follow instructions.
 
 - **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`,
-  `/ai-bid-gen:organize-kb`, and `/ai-bid-gen:write-bid` commands (plus the `write-bid`,
-  `find-evidence`, `humanize`, `enrich-kb`, `build-index`, and `lint-kb` skills)
-  automatically.
+  `/ai-bid-gen:organize-kb`, `/ai-bid-gen:write-bid`, and `/ai-bid-gen:md-to-txt`
+  commands (plus the `write-bid`, `find-evidence`, `humanize`, `enrich-kb`,
+  `build-index`, `lint-kb`, and `md-to-txt` skills) automatically.
 - **Any other model/tool:** point the model at the instruction files directly
   (below). The behavior is identical because the files are the source of truth.
 
@@ -61,7 +61,13 @@ showing the fields to fill in.
 7. Drafts the bid in the chosen profile's voice, written to **read as human, not
    AI-generated**. Pricing is included **only if the job asked** about
    rate/budget/hours.
-8. Refines on your feedback and saves to `bids/<job-slug>/bid.md`.
+8. Refines on your feedback and saves to `bids/<NNN>/` — a sequential numbered folder
+   holding `jd.md` (the post, verbatim), `bid.md` (the bid text alone, ready to copy and
+   send) and `notes.md` (context, decisions and declared gaps).
+9. Need a paste-ready version? Run `/ai-bid-gen:md-to-txt bids/<NNN>/bid.md` — it writes
+   `bid.txt` beside the source with the markdown stripped and paragraphs unwrapped, so it
+   pastes cleanly into Google Docs or an application form. Saving a bid never produces a
+   `.txt` on its own.
 
 > **Mimic mode** reproduces your chosen sample's format exactly — same structure,
 > sections, ordering, and style; only the content changes. **Inspiration mode**
@@ -124,7 +130,8 @@ ai-bid-gen/
 ├── commands/
 │   ├── init.md              # scaffolds the bid-resources/ knowledge base
 │   ├── organize-kb.md       # orchestrator: enrich + index + lint the knowledge base
-│   └── write-bid.md         # runs the write-bid skill
+│   ├── write-bid.md         # runs the write-bid skill
+│   └── md-to-txt.md         # converts one .md file to paste-ready .txt beside it
 ├── skills/
 │   ├── write-bid/
 │   │   └── SKILL.md         # orchestrator: runs the full bid flow
@@ -136,8 +143,12 @@ ai-bid-gen/
 │   │   └── SKILL.md         # read project prose → add structured frontmatter
 │   ├── build-index/
 │   │   └── SKILL.md         # generate projects/INDEX.md for fast retrieval
-│   └── lint-kb/
-│       └── SKILL.md         # audit the KB and report gaps (never fills them)
+│   ├── lint-kb/
+│   │   └── SKILL.md         # audit the KB and report gaps (never fills them)
+│   └── md-to-txt/
+│       ├── SKILL.md         # markdown → paste-ready plain text
+│       └── scripts/
+│           └── md_to_txt.py # the converter (verifies no word changed)
 ├── LICENSE
 └── README.md
 ```
@@ -147,6 +158,9 @@ The plugin uses an **orchestrator + reusable skills** pattern:
   `humanize` (the anti-AI-tell voice rules).
 - `organize-kb` composes `enrich-kb`, `build-index`, and `lint-kb` to turn a
   plain-prose knowledge base into a retrieval-ready one.
+
+`md-to-txt` stands alone: point it at any markdown file and it writes a paste-ready
+`.txt` next to it, verifying that not one word changed.
 
 The reusable skills are useful on their own and are the foundation for future outputs
 (cover letters, resumes) that draw from the same knowledge base.

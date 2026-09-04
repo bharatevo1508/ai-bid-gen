@@ -192,8 +192,47 @@ strictly within the chosen sample's format **and re-run the Step 7a checkpoint**
 any change that could affect length or sections. In Inspiration mode, keep revisions
 consistent with the synthesized structure and hook. Keep applying `humanize` on every
 revision.
-
 ## Step 9 — Save
 
-Once the user is happy, save the bid to `bids/<job-slug>/bid.md` (create the `bids/`
-directory if needed). Use a short slug derived from the job title.
+Once the user is happy, save to `bids/<NNN>/` — a zero-padded, three-digit sequential ID.
+Resolve `<NNN>` by scanning the existing `bids/` entries and incrementing the highest one;
+start at `001` when `bids/` is absent or empty. Never reuse or renumber an existing ID. Do
+not use a slug derived from the job title.
+
+Write **three** files into that folder:
+
+```
+bids/001/
+├── jd.md      # the job description, verbatim
+├── bid.md     # the bid, and nothing but the bid
+└── notes.md   # context, decisions, gaps
+```
+
+**`jd.md`** — the job description exactly as the user supplied it. No summarizing, no
+reformatting. Keep the client stats, the budget line and the mandatory-skills list intact:
+this is the evidence record of what the bid was written against.
+
+**`bid.md`** — **only** the exact bid text, in readable markdown. The first line of the
+file is the first line of the bid. No job-title heading, no `## Bid text` heading, no job
+context, no meta about the profile, mode, pricing or evidence. This file is what gets
+copied and sent, so anything a user would have to delete before sending does not belong in
+it. One exception: if the post demands a specific opening line (an anti-bot check such as
+"start your application with AI FRONT-END"), that line **is** part of the bid and stays at
+the top of `bid.md`.
+
+**`notes.md`** — everything else you know about this bid:
+
+- Job context: client stats, budget, duration, mandatory skills, the tone of the post.
+- Which profile you bid as, and which mode (Mimic or Inspiration) you used.
+- The pricing decision and the reason for it.
+- Evidence used — which projects you drew on.
+- Gaps declared in the bid, and any gap you left undeclared.
+
+The Step 6 gap report and the Step 5 profile listing are the source material for
+`notes.md`. Write them there rather than dropping them once the draft is approved.
+
+**Plain-text export.** This step writes three files and no more — never a `.txt`. If the
+user wants a paste-ready version of the bid, tell them to run
+`/ai-bid-gen:md-to-txt bids/<NNN>/bid.md`, which writes `bid.txt` next to it. Do not run
+that conversion as part of saving, do not hand-convert the file, and never alter `bid.md`
+to make a later conversion easier.

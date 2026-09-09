@@ -60,8 +60,9 @@ showing the fields to fill in.
 6. **Warns you** if evidence is missing (e.g. no project backs the problem or uses
    the tech) and **asks clarifying questions** when anything is unclear.
 7. Drafts the bid in the chosen profile's voice, written to **read as human, not
-   AI-generated**. Pricing is included **only if the job asked** about
-   rate/budget/hours.
+   AI-generated** — and to **read simply**: short sentences, outcome before tech, light on
+   jargon, so a client skimming in seconds gets it on the first pass. Pricing is included
+   **only if the job asked** about rate/budget/hours.
 8. Tells you **which portfolio pieces to attach** — the items already published on the
    profile you bid as that back the projects the bid cites.
 9. Refines on your feedback and saves to `bids/<NNN>-<slug>/` — a numbered, titled folder
@@ -149,7 +150,7 @@ ai-bid-gen/
 │   ├── find-evidence/
 │   │   └── SKILL.md         # find & rank relevant projects/profile for any input
 │   ├── humanize/
-│   │   └── SKILL.md         # make any output read human, not AI-generated
+│   │   └── SKILL.md         # make any output read human, not AI-generated, and easy to skim
 │   ├── enrich-kb/
 │   │   └── SKILL.md         # read project prose → add structured frontmatter
 │   ├── build-index/

@@ -65,7 +65,7 @@ Take the **job description** in whichever of these forms the user supplies:
    written against the wrong text. Ask the user to paste the post or save it to a file.
 
 If nothing was supplied, ask for a paste or a path. Whichever form it arrives in, the job
-description is copied **verbatim** into `bids/<NNN>/jd.md` in Step 9 — a file input is not
+description is copied **verbatim** into `bids/<NNN>-<slug>/jd.md` in Step 9 — a file input is not
 a reason to skip that copy or to link to the original instead. Never summarize, trim, or
 reformat it on the way in.
 
@@ -300,21 +300,30 @@ not in the array, say so plainly ("`realtime-sync` is cited but isn't a portfoli
 this profile, so there's nothing to attach for it") and record it as a gap for Step 9's
 `## Gaps to fix in the knowledge base`. Never invent a portfolio piece, and never suggest
 attaching something the array does not list. The attachments are advice to the user —
-they are named in `notes.md`, never inside `bid.md`.
+they are named in `notes.md`, never inside `bid.txt`.
 
 ## Step 9 — Save
 
-Once the user is happy, save to `bids/<NNN>/` — a zero-padded, three-digit sequential ID.
-Resolve `<NNN>` by scanning the existing `bids/` entries and incrementing the highest one;
-start at `001` when `bids/` is absent or empty. Never reuse or renumber an existing ID. Do
-not use a slug derived from the job title.
+Once the user is happy, save to `bids/<NNN>-<slug>/` — a zero-padded, three-digit
+sequential ID, a hyphen, then a short slug from the job title.
+
+- **`<NNN>`** — resolve by scanning the existing `bids/` entries, reading the numeric
+  prefix of each, and incrementing the highest one; start at `001` when `bids/` is absent
+  or empty. Never reuse or renumber an existing ID. The number is what guarantees ordering
+  and uniqueness, so two similar jobs never collide.
+- **`<slug>`** — three or four lowercase words from the job title, hyphen-separated
+  (`realtime-dashboard`, `nextjs-migration`), so the folder is recognizable at a glance in
+  a list of twenty. It is cosmetic only — the `<NNN>` already makes the folder unique, so a
+  repeated or imperfect slug is harmless. If no sensible title exists, `<NNN>-bid` is fine.
+
+The prefix sorts the folders chronologically; the slug makes them scannable.
 
 Write **three** files into that folder:
 
 ```
-bids/001/
+bids/001-realtime-dashboard/
 ├── jd.md      # the job description, verbatim
-├── bid.md     # the bid, and nothing but the bid
+├── bid.txt    # the bid, paste-ready plain text — the only thing you send
 └── notes.md   # context, decisions, gaps
 ```
 
@@ -324,18 +333,31 @@ this is the evidence record of what the bid was written against. If the screenin
 questions arrived separately from the post, append them verbatim at the end under a
 `## Screening questions` heading, so the record of what was answered is complete.
 
-**`bid.md`** — **only** the exact bid text, in readable markdown. The first line of the
-file is the first line of the bid. No job-title heading, no `## Bid text` heading, no job
-context, no meta about the profile, mode, pricing or evidence. This file is what gets
-copied and sent, so anything a user would have to delete before sending does not belong in
-it. One exception: if the post demands a specific opening line (an anti-bot check such as
-"start your application with AI FRONT-END"), that line **is** part of the bid and stays at
-the top of `bid.md`.
+**`bid.txt`** — **only** the exact bid text, as **paste-ready plain text**. This is the
+file that gets copied straight into an Upwork form, Google Docs, or an email, so it carries
+no markdown syntax and nothing a user would have to delete before sending. Write it plain
+from the start — do **not** draft markdown and convert it:
 
-When the post had a separate screening-question block, `bid.md` holds the letter **and**
-the `Q:` / `A:` block below the salutation, exactly as approved in Step 8. The Q/A is part
-of the bid, not meta about it — the rule above still holds, and there is no separate
-answers file.
+- No `#` headings, no `**bold**`, `*italic*`, `` `code` `` or blockquotes. The first line
+  of the file is the first line of the bid.
+- No job-title heading, no `## Bid text` heading, no job context, no meta about the
+  profile, mode, pricing or evidence.
+- **One paragraph per line** — write each paragraph as a single unwrapped line with a blank
+  line between paragraphs, so it reflows to any width when pasted rather than carrying hard
+  line breaks. Do not hard-wrap at a fixed column.
+- URLs are written bare (`https://example.com/work`) so the target form auto-links them.
+- The words are exactly the ones approved in Step 8 — saving changes formatting only,
+  never wording.
+
+One exception to "no meta": if the post demands a specific opening line (an anti-bot check
+such as "start your application with AI FRONT-END"), that line **is** part of the bid and
+stays at the top of `bid.txt`.
+
+When the post had a separate screening-question block, `bid.txt` holds the letter **and**
+the `Q:` / `A:` block below the salutation, exactly as approved in Step 8, with each `Q:`
+and `A:` on its own line and a blank line between pairs so every answer lifts cleanly into
+its own field. The Q/A is part of the bid, not meta about it — there is no separate answers
+file.
 
 **`notes.md`** — everything else you know about this bid:
 
@@ -364,8 +386,6 @@ in the letter. If there were none, write `None` under the heading; never omit th
 The Step 6 gap report and the Step 5 profile listing are the source material for
 `notes.md`. Write them there rather than dropping them once the draft is approved.
 
-**Plain-text export.** This step writes three files and no more — never a `.txt`. If the
-user wants a paste-ready version of the bid, tell them to run
-`/ai-bid-gen:md-to-txt bids/<NNN>/bid.md`, which writes `bid.txt` next to it. Do not run
-that conversion as part of saving, do not hand-convert the file, and never alter `bid.md`
-to make a later conversion easier.
+This step writes exactly these three files — `jd.md`, `bid.txt`, and `notes.md`. The bid
+is saved paste-ready as `bid.txt`; there is no separate conversion step and no markdown
+copy of the bid to keep in sync.

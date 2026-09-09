@@ -37,8 +37,16 @@ natural length. See Step 7 for how to synthesize it. This mode is allowed to dep
 from any single sample's exact format because it is building a new one from the shared
 DNA of all of them.
 
-In both modes, the bid must read as human — always apply the **`humanize`** skill
-(see Step 7).
+In both modes, the bid must read as human **and be easy to skim** — always apply the
+**`humanize`** skill, including its **Readability** rules (short sentences, outcome before
+mechanism, a jargon budget), on every line. See Step 7.
+
+**Readability vs. the modes.** Readability governs *sentences*; the modes govern
+*structure*. They do not conflict. Mimic mode still mirrors the sample's sections,
+ordering, and length exactly — readability only decides that, between two phrasings that
+fit the sample, you pick the clearer one; it never adds or drops a section. Inspiration
+mode applies the Readability rules at full force. A dense sample is not a licence to write
+a dense bid: keep the sample's shape, write clearer sentences inside it.
 
 ## Step 1 — Verify the knowledge base
 
@@ -161,6 +169,11 @@ the profile simply has nothing on record there — say so when it matters, and n
 a link or a portfolio entry.
 
 **Sample mode.** Read `bid-resources/sample-bids/` (real bids only — ignore scaffolding).
+A usable sample is a **complete, real bid**. A file that still carries unfilled placeholder
+sections (`[PROJECT 1 – insert details]`, `Insert project details…`) is a skeleton, not a
+sample: do not mimic it and do not fold it into the inspiration-mode pattern, because its
+"format" is a blank to fill, not a format that won work. If a partially-filled skeleton is
+the only thing present, treat the folder as having no real sample and say so.
 If there are no real samples, stop and tell the user to add at least one won bid first.
 Otherwise ask:
 
@@ -215,11 +228,17 @@ Write the bid according to the mode chosen in Step 5:
   across all samples. Open with a **strong, specific hook** (not a generic "I'm excited
   to apply"), follow the persuasion beats the samples share (credibility, understanding
   of the client's problem, proof, clear next step), and keep it around the samples'
-  typical length. Aim for catchy and memorable while still grounded in the profile's
-  voice and the matched project evidence.
+  typical length. **Keep it tight** — the client is skimming, so a shorter bid that lands
+  beats a longer one that has to be waded through; when in doubt, cut. Aim for catchy and
+  memorable while still grounded in the profile's voice and the matched project evidence.
 - **Voice:** use the chosen profile's voice and positioning, and apply the
   **`humanize`** skill (`skills/humanize/SKILL.md`) to every line — no em-dash spam, no
   buzzwords, no robotic parallelism. It must not read as AI-written.
+- **Readability:** apply `humanize`'s **Readability** rules as you draft, not as an
+  afterthought. One idea per sentence; break any sentence stacking three or more points.
+  Lead each project with the **outcome** (the result, the problem solved) before the tech.
+  Name a stack once, in a phrase; drop or plainly gloss acronyms a non-technical client
+  won't know. Short paragraphs over walls of prose. Specific *and* simple.
 - **Evidence:** weave in the projects confirmed in Step 4 as proof — their
   problem/outcome story and production URLs where relevant.
 - **Pricing / rate:** include pricing ONLY if the job explicitly asked the applicant to
@@ -282,13 +301,33 @@ numbers** — never claim parity without measuring it:
    "comparable length" or "same length" unless the counts back it up. A false parity
    claim is worse than a visible miss, because it tells the user not to re-check.
 
+## Step 7b — Readability checkpoint (both modes)
+
+Before showing **any** draft, in either mode, read it once as the client will — skimming,
+in a hurry, maybe not an engineer. Fix it if it fails any of these:
+
+1. **Longest sentence.** Find it. If it stacks three or more separate points or runs past
+   ~25 words, split it. Repeat until the longest sentence passes.
+2. **Jargon.** Flag every acronym or internal term a non-technical client wouldn't know
+   (`RRF`, `OpenTelemetry`, `semaphores`). Cut it, or gloss it in plain words. A stack is
+   named once, in a phrase.
+3. **Outcome first.** Each project leads with what it achieved, not the technology. If the
+   first thing about a project is the framework, reorder it.
+4. **The five-second test.** Does the value land in the first two lines? If a skimmer would
+   not know why to keep reading, rewrite the opening.
+
+This is sentence-level only — it never changes the structure, so it does not disturb the
+Mimic checkpoint above. Keep the concrete details and metrics; just make them land on the
+first read.
+
 ## Step 8 — Refine
 
 Show the draft and iterate on the user's feedback. In Mimic mode, keep every revision
 strictly within the chosen sample's format **and re-run the Step 7a checkpoint** after
 any change that could affect length or sections. In Inspiration mode, keep revisions
-consistent with the synthesized structure and hook. Keep applying `humanize` on every
-revision.
+consistent with the synthesized structure and hook. Keep applying `humanize`, and
+**re-run the Step 7b readability checkpoint**, on every revision — an edit that fixes one
+thing often lengthens a sentence or reintroduces jargon.
 
 ### Suggested attachments
 

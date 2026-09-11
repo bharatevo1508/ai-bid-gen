@@ -12,9 +12,10 @@ instruction files, so **any AI coding assistant can use it** — Claude Code, Co
 Cursor, or anything else that can read files and follow instructions.
 
 - **Claude Code:** install it as a plugin (below) — you get the `/ai-bid-gen:init`,
-  `/ai-bid-gen:organize-kb`, `/ai-bid-gen:score`, and `/ai-bid-gen:write-bid` commands
-  (plus the `score`, `write-bid`, `find-evidence`, `humanize`, `enrich-kb`,
-  `build-index`, and `lint-kb` skills) automatically.
+  `/ai-bid-gen:organize-kb`, `/ai-bid-gen:score`, `/ai-bid-gen:write-bid`, and
+  `/ai-bid-gen:fetch-upwork-jobs` commands (plus the `score`, `write-bid`,
+  `find-evidence`, `humanize`, `enrich-kb`, `build-index`, `lint-kb`, and
+  `fetch-upwork-jobs` skills) automatically.
 - **Any other model/tool:** point the model at the instruction files directly
   (below). The behavior is identical because the files are the source of truth.
 

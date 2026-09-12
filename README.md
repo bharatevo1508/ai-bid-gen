@@ -186,6 +186,7 @@ ai-bid-gen/
 ├── commands/
 │   ├── init.md              # scaffolds the bid-resources/ knowledge base
 │   ├── organize-kb.md       # orchestrator: enrich + index + lint the knowledge base
+│   ├── fetch-upwork-jobs.md # runs the fetch-upwork-jobs skill
 │   ├── score.md             # runs the score skill
 │   └── write-bid.md         # runs the write-bid skill
 ├── skills/
@@ -193,6 +194,8 @@ ai-bid-gen/
 │   │   └── SKILL.md         # scores how well the KB backs a JD; writes jd.md + notes.md
 │   ├── write-bid/
 │   │   └── SKILL.md         # orchestrator: drafts the bid once a job is scored
+│   ├── fetch-upwork-jobs/
+│   │   └── SKILL.md         # source jobs from an Upwork MCP → raw files under jobs/
 │   ├── find-evidence/
 │   │   └── SKILL.md         # find & rank relevant projects/profile for any input
 │   ├── humanize/
@@ -203,17 +206,41 @@ ai-bid-gen/
 │   │   └── SKILL.md         # generate projects/INDEX.md for fast retrieval
 │   └── lint-kb/
 │       └── SKILL.md         # audit the KB and report gaps (never fills them)
+├── job-presets.md           # (created on first fetch) reusable Upwork search criteria
+├── jobs/                    # (created on first fetch) raw sourced job posts
 ├── LICENSE
 └── README.md
 ```
 
 The plugin uses an **orchestrator + reusable skills** pattern:
+- `fetch-upwork-jobs` is the optional **sourcing** step: it pulls candidate posts from a
+  connected Upwork MCP into `jobs/`, tagging each with its Upwork `Job ID`. It never
+  scores or drafts.
 - `write-bid` depends on `score` having run for the job (auto-invoking it if not), and
   composes `humanize` (the anti-AI-tell voice rules) directly while drafting.
 - `score` composes `find-evidence` (the "find & fetch" retrieval step) to work out what's
-  relevant before turning it into a confidence score.
+  relevant before turning it into a confidence score. It dedupes on the Upwork `Job ID`
+  (recorded as `Source:` in `notes.md`) so the same job never lands in two `bids/` folders.
 - `organize-kb` composes `enrich-kb`, `build-index`, and `lint-kb` to turn a
   plain-prose knowledge base into a retrieval-ready one.
 
 The reusable skills are useful on their own and are the foundation for future outputs
 (cover letters, resumes) that draw from the same knowledge base.
+
+### Shared vocabulary — one source of truth
+
+To stop the skills from drifting apart, two vocabularies are kept deliberately separate,
+and every skill must respect the split:
+
+- **Structured / index fields** — `tech`, `domain`, `problem_tags`, `url`. These live in
+  project frontmatter and `INDEX.md`, and are the **only** fields `find-evidence` ranks on.
+  There is intentionally **no `has_outcome` field** (removed in v1.4 — it was rarely
+  filled, so it added noise, not signal). Do not reintroduce a frontmatter flag for outcome.
+- **Prose signals** — a **measured outcome** (a concrete result or metric in a project's
+  body) is assessed by *reading the file*, never from a frontmatter flag. `find-evidence`
+  surfaces it for shortlisted candidates, `score` weighs it, and `lint-kb` counts projects
+  that lack it. Any new skill that cares about outcomes reads the prose — it must not expect
+  an index field.
+
+When adding or editing a skill, match these definitions rather than inventing a parallel
+one; that is what keeps ranking, scoring, and linting from contradicting each other.

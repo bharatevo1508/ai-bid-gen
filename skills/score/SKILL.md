@@ -34,6 +34,11 @@ Take the **job description** in whichever of these forms the user supplies:
 1. **Pasted text** — in the message that invoked this skill, or in reply to your ask.
 2. **A file** — a path or an `@file` reference (`@jds/jd-001.md`). Read the file and use
    its contents as the job description. This is a first-class input, not a fallback.
+   A file produced by `fetch-upwork-jobs` (`jobs/<jobid>-slug.md`) is one of these: it
+   wraps the post in `## Job Info` / `## Client Info` / `## Description` / `## Screening
+   Questions` sections. Treat the **whole file** as the job description — the wrapper is
+   part of the sourced record, not something to strip. If it has a `Job ID:` line under
+   `## Job Info`, capture that ID; it drives the dedup check in Step 4.
 3. **A URL** — refused. Job boards block crawlers and a half-fetched post produces a
    score (or later, a bid) written against the wrong text. Ask the user to paste the
    post or save it to a file.
@@ -79,8 +84,20 @@ from it.
 
 ## Step 4 — Create the job folder and save the JD
 
-Resolve `bids/<NNN>-<slug>/` — a zero-padded, three-digit sequential ID, a hyphen, then a
-short slug from the job title.
+**First, dedup — don't score the same job into two folders.** Before minting a new folder,
+check whether this job was already scored:
+
+- If the JD came from a `fetch-upwork-jobs` file with a `Job ID:` (Step 2), scan existing
+  `bids/*/notes.md` for that same ID recorded under `## Job context` (see the `Source:`
+  line below). If one matches, **reuse that folder** — re-read its `jd.md`/`notes.md`
+  instead of creating a new `<NNN>`. Tell the user it's already scored and show the
+  existing score.
+- If there's no Job ID (pasted text, or a plain file), compare the incoming JD against the
+  `jd.md` of recent `bids/` folders. On a clear match, reuse rather than duplicate; when
+  genuinely unsure, ask the user rather than silently forking a second folder.
+
+Only if no existing folder matches, resolve a new `bids/<NNN>-<slug>/` — a zero-padded,
+three-digit sequential ID, a hyphen, then a short slug from the job title.
 
 - **`<NNN>`** — resolve by scanning the existing `bids/` entries, reading the numeric
   prefix of each, and incrementing the highest one; start at `001` when `bids/` is absent
@@ -95,9 +112,11 @@ This folder is claimed the moment `score` runs, even if the user never proceeds 
 
 Write **`jd.md`** — the job description exactly as the user supplied it. No summarizing,
 no reformatting. Keep the client stats, the budget line and the mandatory-skills list
-intact. If the screening questions arrived separately from the post, append them verbatim
-at the end under a `## Screening questions` heading, so the record of what the job asked
-is complete.
+intact. For a `fetch-upwork-jobs` file, "exactly as supplied" means the whole sectioned
+file, wrapper and all — it already carries `## Screening Questions` inline, so do **not**
+re-append them. Only when screening questions arrived *separately* from a pasted or plain
+post, append them verbatim at the end under a `## Screening questions` heading, so the
+record of what the job asked is complete.
 
 ## Step 5 — Find supporting evidence
 
@@ -113,11 +132,18 @@ reasoning**. This measures how well the KB backs *this specific JD* — it is no
 prediction of whether the bid would win, and not a judgment of whether the job itself is
 worth pursuing.
 
+A note on evidence source: `find-evidence` ranks off the index's structured fields
+(`tech`, `domain`, `problem_tags`, `url`) — there is no `has_outcome` field. Whether a
+project has a **measured outcome** is a prose signal `find-evidence` reports for the top
+candidates it opens in full; read it from those one-line reasons, not from any frontmatter
+flag. Both a live URL and a measured outcome still count toward the score — they're just
+sourced differently (URL from the index, outcome from the prose).
+
 Weigh toward a **higher** score when:
 - Multiple projects match on more than one axis (problem *and* tech), per
   `find-evidence`'s ranking.
-- At least one strong match has a **measured outcome** and a **live production URL** —
-  the two things that make a cited project actually persuasive.
+- At least one strong match has a **measured outcome** (from its prose) and a **live
+  production URL** (`url`) — the two things that make a cited project actually persuasive.
 - At least one profile has real overlap with the job's required skills.
 
 Weigh toward a **lower** score when:
@@ -144,6 +170,9 @@ Write **`notes.md`** with exactly these sections, `---`-separated, in this order
 
 ```markdown
 ## Job context
+- Source: the Upwork `Job ID:` if this came from a `fetch-upwork-jobs` file (e.g.
+  `Source: Upwork job 021547…`), or `Source: pasted` / `Source: <file path>` otherwise.
+  This is what Step 4's dedup check reads to avoid re-scoring the same job twice.
 - Client stats, budget, duration, mandatory skills, the tone of the post.
 - Any embedded instruction/trap found in Step 3, and how the user chose to handle it.
 ---

@@ -149,6 +149,11 @@ Leave a field blank (don't invent a value) if Upwork didn't return it.
 directory — skip it and note the skip in Step 6's report. This makes re-running the same
 preset later safe: it naturally dedupes against jobs already pulled.
 
+The `Job ID:` line under `## Job Info` is also the dedup key downstream: `score` records
+it as the `Source:` in `notes.md` and refuses to score the same job into a second
+`bids/<NNN>-…` folder. Always populate it when Upwork returns it — an empty Job ID
+defeats dedup at both layers.
+
 ## Step 6 — Report back
 
 Tell the user, in one short list:

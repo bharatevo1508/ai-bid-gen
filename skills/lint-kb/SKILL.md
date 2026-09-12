@@ -33,6 +33,10 @@ Across `bid-resources/projects/`, `profiles/`, and `sample-bids/`:
 
 **Projects — strength (report as counts, not errors)**
 - How many have an empty `url` (no live link).
+- How many state **no measured outcome** in their prose (no concrete result or metric —
+  e.g. "cut load time 40%", "scaled to 10k tenants"). This is a prose check, not a
+  frontmatter one: there is no `has_outcome` field to read, so judge it from the body.
+  A project with no outcome can still be cited by capability, but not by proof.
 - Thin projects (little prose beyond the template headings).
 
 **Profiles & sample-bids**

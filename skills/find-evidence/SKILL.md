@@ -51,6 +51,14 @@ axis**:
 Prefer projects that match on **multiple** axes, and prefer ones with a **live
 production URL** (`url` set). Return them ranked, each with a one-line reason it matched.
 
+**Measured outcome is a prose signal, not an index field.** The index carries only
+`tech`, `domain`, `problem_tags`, and `url` — there is no `has_outcome` flag to rank on.
+When you open the top shortlisted candidates in full (as this step already does), note in
+each one's one-line reason whether its prose states a **measured outcome** (a concrete
+result or metric — "cut load time 40%", "scaled to 10k tenants"). This does not change the
+ranking, which is index-driven; it's extra signal the caller (e.g. `score`) needs, surfaced
+by reading the file, so downstream skills never have to re-open projects to find it.
+
 ## Step 3 — Surface profile fit
 
 List **every** real profile from `bid-resources/profiles/` (ignoring scaffolding) — do

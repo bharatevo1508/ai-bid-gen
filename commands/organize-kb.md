@@ -19,8 +19,8 @@ it's missing, tell the user to run `/ai-bid-gen:init` first, then stop.
 ## Step 2 — Enrich projects with frontmatter
 
 Run the **`enrich-kb`** skill (`skills/enrich-kb/SKILL.md`). It reads each real project's
-prose and adds/completes its YAML frontmatter (tech, domain, problem_tags, has_outcome,
-url), non-destructively and idempotently. It never invents values and never rewrites the
+prose and adds/completes its YAML frontmatter (tech, domain, problem_tags, url),
+non-destructively and idempotently. It never invents values and never rewrites the
 prose body.
 
 ## Step 3 — Build the index
@@ -33,8 +33,8 @@ Run the **`build-index`** skill (`skills/build-index/SKILL.md`) to (re)generate
 
 Run the **`lint-kb`** skill (`skills/lint-kb/SKILL.md`) and present its findings. Give the
 user a short, honest summary: how many projects were enriched and indexed, and where the
-KB is weak (projects with no measured outcome, no live URL, thin content, or still on the
-template). These gaps are for the **user** to fill — do not invent content to close them.
+KB is weak (projects with no live URL, thin content, or still on the template). These
+gaps are for the **user** to fill — do not invent content to close them.
 
 ## Notes
 

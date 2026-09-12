@@ -1,6 +1,6 @@
 ---
 name: enrich-kb
-description: Read the prose in each bid-resources project file and add a structured YAML frontmatter block (tech, domain, problem_tags, has_outcome, url) so retrieval is fast and reliable. Use to organize a knowledge base that was written as plain prose, or to backfill frontmatter into projects that don't have it yet. Non-destructive — it only adds frontmatter, never rewrites the case-study prose.
+description: Read the prose in each bid-resources project file and add a structured YAML frontmatter block (tech, domain, problem_tags, url) so retrieval is fast and reliable. Use to organize a knowledge base that was written as plain prose, or to backfill frontmatter into projects that don't have it yet. Non-destructive — it only adds frontmatter, never rewrites the case-study prose.
 ---
 
 # Enrich KB
@@ -25,7 +25,6 @@ title: Acme Realtime Dashboard
 tech: [react, node, postgres, websockets]
 domain: [fintech]
 problem_tags: [dashboard, real-time, data-viz]
-has_outcome: true
 url: https://acme.example.com
 ---
 ```
@@ -40,9 +39,6 @@ Field rules:
 - **`problem_tags`** — short kebab tags for the *kind of problem* solved
   (`dashboard`, `migration`, `real-time`, `payments`, `search`). This is the
   problem-axis match key.
-- **`has_outcome`** — `true` only if the prose contains a **measured** result (a number,
-  %, time saved, revenue, scale, uptime). If the *Outcome / Results* section is empty or
-  vague, set `false`. Do not invent an outcome to justify `true`.
 - **`url`** — the live production URL if one is present in the prose; otherwise leave it
   empty (`url:`). Never fabricate a URL.
 
@@ -57,7 +53,6 @@ is only placeholders, leave it and let `lint-kb` report it.
 Frontmatter must be **derived from the prose, not imagined**. If you cannot tell a
 field's value from what the user wrote:
 - lists (`domain`, `problem_tags`, `tech`) → include only what the text supports;
-- `has_outcome` → `false`;
 - `url` → empty.
 
 It is correct for a thin project to get a thin frontmatter block. `lint-kb` will surface
@@ -82,8 +77,8 @@ Users add projects over time and re-run the organizer.
    write the frontmatter block at the very top of the file, immediately followed by the
    existing content unchanged.
 3. Report what you enriched, what you skipped (already had frontmatter), and which files
-   came out thin (e.g. `has_outcome: false`, empty `url`, empty `domain`) so the caller
-   can pass that to the user.
+   came out thin (e.g. empty `url`, empty `domain`) so the caller can pass that to the
+   user.
 
 > Profiles and sample-bids are few and are read in full at bid time, so they do **not**
 > need frontmatter. This skill enriches `projects/` only.

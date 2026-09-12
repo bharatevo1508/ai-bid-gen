@@ -34,7 +34,6 @@ its slug (the filename) plus its frontmatter fields:
 - tech: react, node, postgres, websockets
 - domain: fintech
 - problem_tags: dashboard, real-time, data-viz
-- has_outcome: true
 - url: https://acme.example.com
 
 ## legacy-migration.md
@@ -42,7 +41,6 @@ its slug (the filename) plus its frontmatter fields:
 - tech: python, django, postgres
 - domain: 
 - problem_tags: migration, billing
-- has_outcome: false
 - url: 
 ```
 

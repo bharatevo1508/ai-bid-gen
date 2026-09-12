@@ -25,15 +25,13 @@ Across `bid-resources/projects/`, `profiles/`, and `sample-bids/`:
 
 **Projects — retrieval readiness**
 - Projects with **no frontmatter** (need `enrich-kb`).
-- Frontmatter that **contradicts the prose** — e.g. `has_outcome: true` but the
-  *Outcome* section is empty, a `url:` that doesn't appear in the body, or `tech`/`domain`
-  tags the prose never mentions. Flag these; frontmatter is the retrieval index and must
-  match the narrative it indexes.
+- Frontmatter that **contradicts the prose** — e.g. a `url:` that doesn't appear in the
+  body, or `tech`/`domain` tags the prose never mentions. Flag these; frontmatter is the
+  retrieval index and must match the narrative it indexes.
 - `INDEX.md` missing or stale (fewer/more entries than real project files) → recommend
   `build-index`.
 
 **Projects — strength (report as counts, not errors)**
-- How many projects have `has_outcome: false` (no measured result).
 - How many have an empty `url` (no live link).
 - Thin projects (little prose beyond the template headings).
 
@@ -54,8 +52,8 @@ Across `bid-resources/projects/`, `profiles/`, and `sample-bids/`:
 Group findings by severity:
 - **Blocking** — anything that stops a bid being written (empty folder, no real samples).
 - **Retrieval** — missing frontmatter / stale index / frontmatter-vs-prose contradictions.
-- **Strength** — counts of missing outcomes/URLs and thin content, so the user knows
-  where the portfolio is weak.
+- **Strength** — counts of missing URLs and thin content, so the user knows where the
+  portfolio is weak.
 
 For each item, name the exact file(s) and say what to add. Recommend the fix skill where
 one applies (`enrich-kb`, `build-index`). Do not change any file.

@@ -35,7 +35,7 @@ the caller already passed these extracted, use them instead of re-deriving.
 
 **Use the index if it exists.** If `bid-resources/projects/INDEX.md` is present, read it
 first — it carries each project's structured frontmatter (tech, domain, problem_tags,
-has_outcome, url). Rank off the index, then open in full **only** the top candidates you
+url). Rank off the index, then open in full **only** the top candidates you
 shortlist. This avoids reading every project on a large knowledge base. If there is no
 `INDEX.md` (the user hasn't run `/ai-bid-gen:organize-kb` yet), fall back to scanning the
 project files directly — behavior is the same, just slower. Either way, ignore any
@@ -48,9 +48,8 @@ axis**:
   the input, and/or
 - by **tech / skills** — the project's `tech` / *Tech stack* overlaps the input.
 
-Prefer projects that match on **multiple** axes, and prefer ones with a **measured
-outcome** (`has_outcome: true`) and a **live production URL** (`url` set). Return them
-ranked, each with a one-line reason it matched.
+Prefer projects that match on **multiple** axes, and prefer ones with a **live
+production URL** (`url` set). Return them ranked, each with a one-line reason it matched.
 
 ## Step 3 — Surface profile fit
 
